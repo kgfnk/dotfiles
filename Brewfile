@@ -36,6 +36,7 @@ install w3m
 install tree
 install sl
 install macvim
+install ricty
 # プログラム言語
 install rbenv
 install ruby-build
