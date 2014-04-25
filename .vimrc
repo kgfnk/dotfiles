@@ -117,8 +117,6 @@ hi Pmenu guibg=#666666
 hi PmenuSel guibg=#8cd0d3 guifg=#666666
 hi PmenuSbar guibg=#333333
 
-" tmuxで256色を使用
-set t_ut=
 set t_Co=256
 
 " tmuxのインサートモードでカーソルを変更
@@ -223,7 +221,7 @@ set clipboard+=unnamed
 set clipboard+=autoselect
 
 " ステータスラインに文字コードと改行文字を表示
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
 set rtp+=~/.vim/
 
@@ -519,8 +517,10 @@ NeoBundle "thinca/vim-qfreplace"
 "let g:syntastic_html_validator_parser='html5'
 
 NeoBundle "vim-scripts/DirDiff.vim"
-NeoBundle "Lokaltog/vim-powerline"
-let g:Powerline_symbols='fancy'
+NeoBundle "itchyny/lightline.vim"
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 " Syntax
 "NeoBundle "othree/html5.vim"
