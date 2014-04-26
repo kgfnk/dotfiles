@@ -71,6 +71,5 @@ cask install yorufukurou
 cask install virtualbox
 cask install vagrant
 cask install dash
-#cask install macvim
 #古いバージョンを削除
 cleanup
