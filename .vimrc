@@ -149,24 +149,8 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 nnoremap t :tabnew<CR>
 
-nnoremap <Leader>] :cn<CR>
-nnoremap <Leader>[ :cp<CR>
-
 " ヴィジュアルモードで置換
 vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
-
-" バッファ切り替え
-nnoremap <Space>b :Unite buffer<CR>
-nnoremap <Space>f :VimFilerBufferDir<CR>
-nnoremap <Space>r :Unite register<CR>
-nnoremap <Space>v :vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
-nnoremap <Space>V :Vexplore!<CR><CR>
-nnoremap <Space>r :Unite register<CR>
-" マーク
-nnoremap <Space>m :marks<CR>:mark<Space>
-" タブ
-nnoremap <Space>t :tabnew<CR>
-nnoremap <Space>T :tabnew<CR>:edit .<CR>
 
 " vimrc再読込編集
 if has('win32')
@@ -176,7 +160,6 @@ else
 	nnoremap <Space>s :source ~/.vimrc<CR>
 	nnoremap <Space>. :tabnew ~/.vimrc<CR>
 endif
-
 
 " 日付入力
 inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
@@ -202,9 +185,10 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
 
-" 英字キーボード用に;と:を入れ替える。
+" ;と:を入れ替える。(英字キーボード用)
 nnoremap ; :
 
+"エラーウインドウ
 nnoremap <silent> <Leader>] :cn<CR>
 nnoremap <silent> <Leader>[ :cp<CR>
 
@@ -292,20 +276,9 @@ let g:use_zen_complete_tag = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_settings = {
-\  'lang' : 'ja',
-\  'html' : {
-\    'indentation' : '  ',
-\    'snippets' : {
-\      'jq' : "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js\"></script>",
-\    }
-\  },
-\  'javascript' : { 
-\    'indentation' : '  ',
-\    'snippets'   : { 
-\      'jq' : "\\$(function() {\n\t${cursor}${child}\n});"
-\    }
-\  }
+\  'lang' : 'ja'
 \}
+"let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_custom.json')), "\n"))
 NeoBundle "mrtazz/simplenote.vim"
 "ID/PASSは別ファイルで定義
 "let g:SimplenoteUsername = ""
@@ -313,6 +286,8 @@ NeoBundle "mrtazz/simplenote.vim"
 source ~/.simplenoterc
 let g:SimplenoteVertical=1
 
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "vim-scripts/Better-Javascript-Indentation"
 NeoBundle "altercation/vim-colors-solarized"
 syntax enable
 set background=dark
@@ -331,6 +306,13 @@ NeoBundleLazy 'Shougo/vimshell', {
 \   'autoload' : { 'commands' : [ 'VimShellBufferDir', 'VimShell', 'VimShellPop' ] },
 \   'depends': [ 'Shougo/vimproc' ],
 \ }
+
+"let s:bundle = neobundle#get('vimshell')
+"function! s:bundle.hooks.on_source(bundle)
+"" vimshell setting
+"let g:vimshell_interactive_update_time = 10
+"let g:vimshell_prompt = $USERNAME."% "
+"endfunction
 nnoremap <silent> vs :tabnew<CR>:VimShell<CR>
 nnoremap <silent> vp :VimShellPop<CR>
 
@@ -344,14 +326,20 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" 補完を始めるキーワード長を変える
+let g:neocomplete#auto_completion_start_length = 1
+let g:neocomplete#min_keyword_length = 2
+let g:neocomplete#sources#syntax#min_keyword_length = 4
+
+" 補完が止まった際に、スキップする長さを短くする
+let g:neocomplete#skip_auto_completion_time = '1.0'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ 'scheme' : $HOME.'/.gosh_completions',
+    \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict'
         \ }
 
 " Define keyword.
@@ -360,6 +348,21 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
+if !exists('g:neocomplete#delimiter_patterns')
+    let g:neocomplete#delimiter_patterns= {}
+endif
+let g:neocomplete#delimiter_patterns.vim = ['#']
+let g:neocomplete#delimiter_patterns.cpp = ['::']
+let g:neocomplete#delimiter_patterns.aspvbs = ['.']
+
+" 使用する補完の種類を減らす
+" 現在のSourceの取得は `:echo keys(neocomplete#variables#get_sources())`
+" デフォルト: ['file', 'tag', 'neosnippet', 'vim', 'dictionary', 'omni', 'member', 'syntax', 'include', 'buffer', 'file/include']
+let g:neocomplete#sources = {
+  \ '_' : ['file', 'tag', 'neosnippet', 'vim', 'dictionary', 'omni', 'member', 'include', 'buffer', 'file/include']
+  \ }
+
+" Define keyword.
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
@@ -442,10 +445,17 @@ if has('conceal')
 endif
 
 NeoBundle "Shougo/neosnippet-snippets"
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets, ~/.vim/snippets'
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['html'] = 'html,javascript,jquery,css'
+let g:neosnippet#scope_aliases['javascript'] = 'javascript,jquery'
 
 " unite
 NeoBundle "Shougo/unite.vim"
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'h1mesuke/unite-outline'
+
+let g:unite_source_history_yank_enable =1  "history/yankの有効化
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
 let g:unite_enable_split_vertically = 1 "縦分割で開く
@@ -456,25 +466,39 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 nnoremap [unite] <Nop>
-nmap <Leader>u [unite]
-nnoremap [unite]u :Unite -no-split<Space>
-nnoremap <silent> [unite]f :Unite<Space>buffer<CR>
-nnoremap <silent> [unite]b :Unite<Space>bookmark<CR>
-nnoremap <silent> [unite]m :Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]r :UniteWithBufferDir file<CR>
+"nmap <Leader>u [unite]
+nmap <Space> [unite]
+"カレントディレクトリを表示
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"バッファと最近開いたファイル一覧を表示
+nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
+"最近開いたディレクトリを表示
+nnoremap <silent> [unite]d :<C-u>Unite<Space>directory_mru<CR>
+"バッファ
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+"レジスタ
+nnoremap <silent> [unite]r :<C-u>Unite<Space>register<CR>
+"タブ
+nnoremap <silent> [unite]t :<C-u>Unite<Space>tab<CR>
+"ヒストリ/ヤンク
+nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
+"ブックマーク
+nnoremap <silent> [unite]m :Unite<Space>bookmark<CR>
+"outline
+nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
+"file_rec:!
+nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec:!<CR>
 
 " 大文字小文字を区別しない
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
 " grep検索
-nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-
+nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 " カーソル位置の単語をgrep検索
-nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-
+nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-r><C-w><CR>
 " grep検索結果の再呼出
-nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+nnoremap <silent> [unite]gg :<C-u>UniteResume search-buffer<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
 if executable('ag')
@@ -495,6 +519,7 @@ let g:toggle_pairs = { 'and':'or', 'or':'and' }
 NeoBundle "Shougo/vimfiler.vim"
 " :e . でVimFilerを開く
 let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_enable_auto_cd = 1
 " DB接続
 NeoBundle "vim-scripts/dbext.vim"
 
@@ -539,9 +564,10 @@ map <Leader>jl  :JekyllList<CR>
 NeoBundle "glidenote/memolist.vim"
 let g:memolist_path = "~/Dropbox/Memo"
 let g:memolist_memo_suffix = "md"
+let g:memolist_unite        = 1
 let g:memolist_memo_date = "%Y-%m-%d %H:%M"
-let g:memolist_memo_suffix = "md"
 let g:memolist_template_dir_path = "~/.vim/template/memolist"
+let g:memolist_unite_option = "-auto-preview"
 
 NeoBundle "gcmt/wildfire.vim"
 let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
@@ -594,4 +620,17 @@ let g:sqlutil_keyword_case = '\U'
 
 filetype plugin indent on
 " }}}
+
+" Enable omni completion.
+autocmd Filetype *
+\	setlocal omnifunc=syntaxcomplete#Complete |
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" 注意: この内容は:filetype onよりも後に記述すること。
+
+
 " vim:set ft=vim foldmethod=manual:
