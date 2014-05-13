@@ -42,6 +42,8 @@ endif
 set backupdir=~/.tmp
 "スワップファイルを作るディレクトリ
 set directory=~/.tmp
+"undoファイル
+set undodir=~/.tmp
 "ファイル内の <Tab> が対応する空白の数
 set tabstop=4
 "シフト移動幅
