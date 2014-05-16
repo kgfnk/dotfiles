@@ -1,0 +1,18 @@
+snippet jq
+abbr $(function() { ... });
+options head
+	$(function() {
+		${1:TARGET}
+	});
+
+snippet event
+options head
+	$("#${1:ID}").${2:click}(function(){
+		${2:TARGET}
+    }();
+
+snippet click
+options head
+	$("#${1:ID}").click(function(){
+		${2:TARGET}
+    }();

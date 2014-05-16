@@ -1,0 +1,113 @@
+snippet vbs
+options head
+	<%@ Language="VBScript" %>
+	<% Option Explicit %>
+	${0}
+
+snippet Dim
+alias dim
+abbr Dim variant
+options head
+	Dim ${1:i}
+
+snippet If
+abbr If ... End
+options head
+	If ${1:True} Then
+		${2:TARGET}
+	End If
+	${0}
+
+snippet Ife
+alias ife
+abbr If ...Else... End If
+options head
+	If ${1:True} Then
+		${2:TARGET}
+	Else
+		${3:TARGET}
+	End If
+	${0}
+
+snippet Function
+alias func
+abbr Function ... End Function
+options word
+	Function ${1:#:method_name}
+		${2:TARGET}
+	End Function
+	${0}
+
+snippet Sub
+alias sub
+abbr Sub ... End Sub
+options word
+	Sub ${1:#:method_name}
+		${2:TARGET}
+	End Sub
+	${0}
+
+snippet Do
+alias do
+alias while
+abbr Do While ... Loop
+options head
+	Do While ${1:#:condition}
+		${2:TARGET}
+	Loop
+	${0}
+
+snippet For
+abbr for
+options head
+	Dim ${1:i}
+	For $1 = ${2:0} To ${3:#:count}
+		${4:TARGET}
+	Next
+	${0}
+
+snippet Request
+alias req
+abbr Request("")
+options head
+	Request("${1:#:parameter_name}")
+	${0}
+
+snippet get
+alias querystring
+abbr Request.QueryString("")
+options head
+	Request.QueryString("${1:#:parameter_name}")
+	${0}
+
+snippet post
+abbr Request.Form("")
+options head
+	Request.Form("${1:#:parameter_name}")
+	${0}
+
+snippet Write
+alias w
+options head
+	Response.Write "${1:#:string}"
+	${0}
+
+snippet Dictionary
+alias dic
+abbr Scripting.Dictionary
+	Dim objDic
+
+		Set objDic = CreateObject("Scripting.Dictionary")
+		objDic.Add "${1:#:key}", ${2:#:value}
+		${0}
+
+snippet block1
+abbr <% %>
+options word
+	<% ${1:TARGET} %>${0}
+
+snippet block2
+abbr <%= %>
+options word
+	<%= ${1:TARGET} %>${0}
+>

@@ -1,0 +1,8 @@
+---
+layout: post
+title: {{_title_}}
+description: ""
+date: {{_date_}}
+categories: "{{_categories_}}"
+tags: [{{_tags_}}]
+---
