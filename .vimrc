@@ -156,11 +156,13 @@ vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
 
 " vimrc再読込編集
 if has('win32')
-	nnoremap <Space>s :source ~/_vimrc<CR>
-	nnoremap <Space>. :tabnew ~/_vimrc<CR>
+	nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
+	nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
+	nnoremap <Space>, :<C-u>tabnew ~/_gvimrc<CR>
 else
-	nnoremap <Space>s :source ~/.vimrc<CR>
-	nnoremap <Space>. :tabnew ~/.vimrc<CR>
+	nnoremap <Space>s :<C-u>source ~/.vimrc<CR> :<C-u>source ~/.gvimrc<CR>
+	nnoremap <Space>. :<C-u>tabnew ~/.vimrc<CR>
+	nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 endif
 
 " 日付入力
