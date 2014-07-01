@@ -101,9 +101,11 @@ augroup END
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 "折りたたみ設定(manual,marker,indent)
-set foldmethod=indent
+"set foldmethod=indent
+set foldmethod=manual
 set foldlevel=1
-set foldnestmax=1
+set foldnestmax=2
+set foldcolumn=2
 
 "CTRL-aで8進数の計算をさせない
 set nrformats-=octal
@@ -137,7 +139,7 @@ set guioptions+=b
 
 "カーソルラインを表示
 set cursorline
-"カーソルコラムを表示（縦線）
+"カーソルカラムを表示（縦線）
 set cursorcolumn
 " }}}
 
