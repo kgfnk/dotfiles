@@ -27,12 +27,14 @@ set number
 " 全角記号を正しく扱う
 set ambiwidth=double
 
-"カーソルの形を変える(iTerm2用)
-let &t_SI = "\e]50;CursorShape=1\x7"
-let &t_EI = "\e]50;CursorShape=0\x7"
+if has('mac')
+	"カーソルの形を変える(iTerm2用)
+	let &t_SI = "\e]50;CursorShape=1\x7"
+	let &t_EI = "\e]50;CursorShape=0\x7"
+endif
 
 " ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
-if !has('win32')
+if has('mac')
 	set imdisable
 else
 " インサートモードから抜けると自動的にIMEをオフにする(windows用)
@@ -112,7 +114,7 @@ set foldcolumn=2
 "CTRL-aで8進数の計算をさせない
 set nrformats-=octal
 
-"gF用にパスに含まれる文字を除外(windows)
+"gf用にパスに含まれる文字を除外(windows)
 set isfname-=:
 
 "ウィンドウを最大化して起動
@@ -153,24 +155,24 @@ cnoremap <C-v> <C-r>+
 " タブ切り替え
 nnoremap <C-l> gt
 nnoremap <C-h> gT
-nnoremap t :tabnew<CR>
+nnoremap t :<C-u>tabnew<CR>
 
 " ヴィジュアルモードで置換
 vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
 
 " バッファ切り替え
-nnoremap <C-Left> :bp<CR>
-nnoremap <C-Right> :bn<CR>
-nnoremap <C-Down> :buffers<CR>
+nnoremap <C-Left> :<C-u>bp<CR>
+nnoremap <C-Right> :<C-u>bn<CR>
+nnoremap <C-Down> :<C-u>buffers<CR>
 
-nnoremap <Leader>f :VimFilerBufferDir<CR>
-nnoremap <Leader>v :vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
-nnoremap <Leader>V :Vexplore!<CR><CR>
+nnoremap <Leader>f :<C-u>VimFilerBufferDir<CR>
+nnoremap <Leader>v :<C-u>vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
+nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
 " マーク
 "nnoremap <Space>m :marks<CR>:mark<Space>
 " タブ
-nnoremap <Space>t :tabnew<CR>
-nnoremap <Space>T :tabnew<CR>:edit .<CR>
+nnoremap <Space>t :<C-u>tabnew<CR>
+nnoremap <Space>T :<C-u>tabnew<CR>:edit .<CR>
 
 " vimrc再読込編集
 nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
@@ -184,12 +186,12 @@ inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
 
 " insertモードを抜ける
 inoremap <C-j> <esc>
-
-nnoremap <ESC><ESC> :nohlsearch<CR>
+ " 検索結果のハイライトを消す
+nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 
 " help
-au BufReadPost *.vim  map K :exe ":help ".expand("<cword>")<CR>
-au BufReadPost .vimrc map K :exe ":help ".expand("<cword>")<CR>
+au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
+au BufReadPost .vimrc map K :<C-u>exe ":help ".expand("<cword>")<CR>
 
 " 入力補助
 inoremap `` ``<Left>
@@ -201,20 +203,20 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
 
-if !has('win32')
+if has('mac')
 	" ;と:を入れ替える。(英字キーボード用)
 	nnoremap ; :
 endif
 
 "エラーウインドウ
-nnoremap <silent> <Leader>] :cn<CR>
-nnoremap <silent> <Leader>[ :cp<CR>
+nnoremap <silent> <Leader>] :<C-u>cn<CR>
+nnoremap <silent> <Leader>[ :<C-u>cp<CR>
 
 " ウインドウ分割時にウインドウサイズを変更
-nnoremap <silent> <S-Left>  :5wincmd ><CR>
-nnoremap <silent> <S-Right> :5wincmd <<CR>
-nnoremap <silent> <S-Up>    :5wincmd -<CR>
-nnoremap <silent> <S-Down>  :5wincmd +<CR>
+nnoremap <silent> <S-Left>  :<C-u>5wincmd ><CR>
+nnoremap <silent> <S-Right> :<C-u>5wincmd <<CR>
+nnoremap <silent> <S-Up>    :<C-u>5wincmd -<CR>
+nnoremap <silent> <S-Down>  :<C-u>5wincmd +<CR>
 
 " }}}
 
@@ -229,11 +231,13 @@ set rtp+=~/.vim/
 
 "set grepprg=findstr\ /nS
 "set grepprg=grep\ -nHrwi
-set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
+"set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
+set grepprg=ag\ -S
+"set grepprg=pt\ /S
 autocmd QuickFixCmdPost *grep* cwindow
-nnoremap gr :grep "<C-R><C-W>" .<CR>
+nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
 "nnoremap gr :vim <cword> % \| cw<CR>
-nnoremap gR :grep -R "<C-R><C-W>" *<CR>
+nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
 
 "" TODOファイル
 command! Todo edit ~/Dropbox/Memo/todo.txt
@@ -285,7 +289,7 @@ let g:quickrun_config={
 NeoBundle "Markdown"
 NeoBundle "tpope/vim-markdown"
 NeoBundle "thinca/vim-ref"
-autocmd FileType ruby,eruby nnoremap <silent> K :Ref refe <cword><CR>
+autocmd FileType ruby,eruby nnoremap <silent> K :<C-u>Ref refe <cword><CR>
 
 NeoBundle "vim-ruby/vim-ruby"
 NeoBundle "tpope/vim-rails"
@@ -510,7 +514,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 nnoremap [unite] <Nop>
 "nmap <Leader>u [unite]
 nmap <Space> [unite]
-nnoremap <silent> [unite]e :Unite<Space>file<CR>
+nnoremap <silent> [unite]e :<C-u>Unite<Space>file<CR>
 "カレントディレクトリを表示
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 "バッファと最近開いたファイル一覧を表示
@@ -526,7 +530,7 @@ nnoremap <silent> [unite]t :<C-u>Unite<Space>tab<CR>
 "ヒストリ/ヤンク
 nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
 "ブックマーク
-nnoremap <silent> [unite]m :Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]m :<C-u>Unite<Space>bookmark<CR>
 "outline
 nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 "file_rec:!
@@ -544,17 +548,20 @@ nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-
 nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
-"if executable('ag')
-"  let g:unite_source_grep_command = 'ag'
-"  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-"  let g:unite_source_grep_recursive_opt = ''
-"endif
-if executable('pt')
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_grep_encoding = 'utf-8'
 endif
+"if executable('pt')
+"  let g:unite_source_grep_command = 'pt'
+"  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+"  let g:unite_source_grep_recursive_opt = ''
+"  let g:unite_source_grep_encoding = 'utf-8'
+"endif
+
+NeoBundle "fuenor/qfixgrep"
+let mygrepprg = 'grep'
 
 NeoBundle "tsukkee/unite-tag"
 autocmd BufEnter *
@@ -630,9 +637,9 @@ NeoBundle "tpope/vim-fugitive"
 NeoBundle "csexton/jekyll.vim"
 let g:jekyll_path = "~/webdottech"
 let g:jekyll_post_suffix = "md"
-map <Leader>jb  :JekyllBuild<CR>
-map <Leader>jn  :JekyllPost<CR>
-map <Leader>jl  :JekyllList<CR>
+map <Leader>jb  :<C-u>JekyllBuild<CR>
+map <Leader>jn  :<C-u>JekyllPost<CR>
+map <Leader>jl  :<C-u>JekyllList<CR>
 
 NeoBundle "glidenote/memolist.vim"
 let g:memolist_path = "~/Dropbox/Memo"
@@ -667,7 +674,7 @@ NeoBundle "mattn/excitetranslate-vim"
 
 nnoremap <silent> tr :<C-u>ExciteTranslate<CR>
 "NeoBundle "daisuzu/translategoogle.vim"
-NeoBundle "vim-scripts/grep.vim"
+"NeoBundle "vim-scripts/grep.vim"
 NeoBundle "vim-scripts/taglist.vim"
 
 if has('win32')
@@ -728,7 +735,6 @@ NeoBundleLazy 'alpaca-tc/alpaca_tags', {
 
 nnoremap <expr>tt  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
 
-"NeoBundle 'taichouchou2/vim-rsense'
 "NeoBundle "Shougo/neocomplcache-rsense.vim"
 "let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
 "let g:rsenseUseOmniFunc = 1
