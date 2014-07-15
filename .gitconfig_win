@@ -1,0 +1,14 @@
+[user]
+	name = kgfnk
+	email = kgfnk@users.noreply.github.com
+[core]
+	editor = gvim
+	precomposeunicode = true
+[diff]
+	tool = gvimdiff
+[difftool]
+	prompt = false
+[alias]
+	vimdiff = difftool
+[merge]
+	tool = gvimdiff
