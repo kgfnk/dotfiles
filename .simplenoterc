@@ -1,0 +1,4 @@
+"SimpleNoteプラグインの設定
+" [Simplenote](http://simplenote.com/)のID/PASSを設定
+let g:SimplenoteUsername = ""
+let g:SimplenotePassword = ""
