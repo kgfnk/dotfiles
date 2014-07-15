@@ -4,6 +4,11 @@
 [core]
 	editor = vim
 	precomposeunicode = true
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	vimdiff = difftool
+[merge]
+	tool = vimdiff
