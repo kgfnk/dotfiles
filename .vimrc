@@ -77,6 +77,7 @@ set showcmd
 set title
 " 構文ごとに色分け表示する
 syntax on
+
 " インクリメンタルサーチを使う
 set incsearch
 " 検索語にマッチした単語をハイライトする
@@ -104,8 +105,8 @@ augroup END
 
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
+
 "折りたたみ設定(manual,marker,indent)
-"set foldmethod=indent
 set foldmethod=manual
 set foldlevel=1
 set foldnestmax=2
@@ -320,6 +321,11 @@ let g:SimplenoteListHeight=30
 NeoBundle "pangloss/vim-javascript"
 NeoBundle "vim-scripts/Better-Javascript-Indentation"
 NeoBundle "altercation/vim-colors-solarized"
+NeoBundle "tomasr/molokai"
+let g:molokai_original = 1
+let g:rehash256 = 1
+NeoBundle "vim-scripts/pyte"
+NeoBundle "jnurmine/Zenburn"
 
 if !has('win32')
 NeoBundle "Shougo/vimproc", {
@@ -670,10 +676,6 @@ let g:gist_detect_filetype = 1
 NeoBundle 'lambdalisue/vim-gista'
 let g:gista#github_user = 'kgfnk'
 
-NeoBundle "mattn/excitetranslate-vim"
-
-nnoremap <silent> tr :<C-u>ExciteTranslate<CR>
-"NeoBundle "daisuzu/translategoogle.vim"
 "NeoBundle "vim-scripts/grep.vim"
 NeoBundle "vim-scripts/taglist.vim"
 
@@ -689,13 +691,11 @@ let Tlist_Enable_Fold_Column = 1	"折りたたみ
 let Tlist_Auto_Update = 1		" 自動アップデート
 let g:xml_syntax_folding = 1
 
-set foldmethod=indent
-set foldlevel=1
-set foldnestmax=2
-set foldcolumn=2
-
 NeoBundle "Lokaltog/vim-easymotion"
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+nmap s <Plug>(easymotion-s2)
 
 NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ 'depends': ['Shougo/vimproc'],
@@ -751,15 +751,54 @@ let g:sqlutil_keyword_case = '\U'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 "NeoBundle 'tomtom/tcomment_vim'
+
 NeoBundle 'othree/eregex.vim'
 let g:eregex_default_enable = 0
 let g:eregex_forward_delim = '/'
 let g:eregex_backward_delim = '?'
 
-"カンペ
-NeoBundle 'gist:hail2u/747628', {
-       \ 'name': 'markdown-cheat-sheet.jax',
-       \ 'script_type': 'doc'}
+NeoBundle "AndrewRadev/switch.vim"
+nnoremap - :Switch<cr>
+
+let g:switch_custom_definitions = [
+\   ['on', 'off'],
+\   ['and', 'or'],
+\   ['start', 'end'],
+\   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+\   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+\   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+\ ]
+
+let b:switch_custom_definitions = [
+\   {
+\     '\<[a-z0-9]\+_\k\+\>': {
+\       '_\(.\)': '\U\1'
+\     },
+\     '\<[a-z0-9]\+[A-Z]\k\+\>': {
+\       '\([A-Z]\)': '_\l\1'
+\     },
+\   },
+\   {
+\         '\(\k\+\)'    : '''\1''',
+\       '''\(.\{-}\)''' :  '"\1"',
+\        '"\(.\{-}\)"'  :   '\1',
+\   },
+\ ]
+
+" foo_bar → fooBar → foo_bar
+let g:variable_style_switch_definitions = [
+\   {
+\     '\<[a-z0-9]\+_\k\+\>': {
+\       '_\(.\)': '\U\1'
+\     },
+\     '\<[a-z0-9]\+[A-Z]\k\+\>': {
+\       '\([A-Z]\)': '_\l\1'
+\     },
+\   }
+\ ]
+nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
+
+NeoBundle "kien/ctrlp.vim"
 
 call neobundle#end()
 
@@ -769,9 +808,7 @@ NeoBundleCheck
 "}}}
 
 " Enable omni completion.
-autocmd Filetype *
-\	setlocal omnifunc=syntaxcomplete#Complete |
-
+autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
