@@ -16,7 +16,7 @@ else
 	set fileformats=unix,dos,mac
 endif
 
-" 設定 {{{
+" 設定
 " Beep音を消す(ヴィジュアルベルを無効)
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
@@ -31,10 +31,7 @@ if has('mac')
 	"カーソルの形を変える(iTerm2用)
 	let &t_SI = "\e]50;CursorShape=1\x7"
 	let &t_EI = "\e]50;CursorShape=0\x7"
-endif
-
-" ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
-if has('mac')
+	" ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
 	set imdisable
 else
 " インサートモードから抜けると自動的にIMEをオフにする(windows用)
@@ -146,17 +143,11 @@ set guioptions+=b
 set cursorline
 "カーソルカラムを表示（縦線）
 set cursorcolumn
-" }}}
 
 " キーマップ設定 {{{
 " ペースト
 inoremap <C-v> <ESC>"*pa
 cnoremap <C-v> <C-r>+
-
-" タブ切り替え
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-nnoremap t :<C-u>tabnew<CR>
 
 " ヴィジュアルモードで置換
 vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
@@ -171,9 +162,13 @@ nnoremap <Leader>v :<C-u>vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
 nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
 " マーク
 "nnoremap <Space>m :marks<CR>:mark<Space>
+"
 " タブ
+" タブ切り替え
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 nnoremap <Space>t :<C-u>tabnew<CR>
-nnoremap <Space>T :<C-u>tabnew<CR>:edit .<CR>
+nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
 
 " vimrc再読込編集
 nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
@@ -219,8 +214,6 @@ nnoremap <silent> <S-Right> :<C-u>5wincmd <<CR>
 nnoremap <silent> <S-Up>    :<C-u>5wincmd -<CR>
 nnoremap <silent> <S-Down>  :<C-u>5wincmd +<CR>
 
-" }}}
-
 " ヤンクの時にクリップボードにもセットする
 set clipboard+=unnamed
 set clipboard+=autoselect
@@ -240,12 +233,14 @@ nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
 "nnoremap gr :vim <cword> % \| cw<CR>
 nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
 
+" }}}
+
 "" TODOファイル
 command! Todo edit ~/Dropbox/Memo/todo.txt
 " 一時ファイル
 command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
 
-" Vandle {{{
+" Vandle
 filetype off            " for vundle
 
 if has("vim_starting")
@@ -808,7 +803,8 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
-"}}}
+
+" }}}
 
 " Enable omni completion.
 autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
@@ -823,4 +819,4 @@ syntax enable
 set background=dark
 colorscheme solarized
 
-" vim:set ft=vim foldmethod=manual:
+" vim:set ft=vim foldmethod=marker:
