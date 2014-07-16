@@ -49,27 +49,27 @@ install freetype
 #---
 #アプリのインストール
 #---
-cask install adobe-reader
-cask install google-chrome
-cask install google-japanese-ime
-cask install dropbox
-cask install github
-cask install skitch
-cask install iterm2
-cask install sublime-text
-cask install bettertouchtool
-cask install keyremap4macbook
-cask install cheatsheet
-cask install kobito
-cask install alfred
+cask install adobe-reader --force
+cask install google-chrome --force
+cask install google-japanese-ime --force
+cask install dropbox --force
+cask install github --force
+cask install skitch --force
+cask install iterm2 --force
+cask install sublime-text --force
+cask install bettertouchtool --force
+cask install keyremap4macbook --force
+cask install cheatsheet --force
+cask install kobito --force
+cask install alfred --force
 # alfredから検索可能にする
-cask alfred link
-cask install xtrafinder
-cask install shiftit
-cask install xquartz
-cask install yorufukurou
-cask install virtualbox
-cask install vagrant
-cask install dash
+cask alfred link --force
+cask install xtrafinder --force
+cask install shiftit --force
+cask install xquartz --force
+cask install yorufukurou --force
+cask install virtualbox --force
+cask install vagrant --force
+cask install dash --force
 #古いバージョンを削除
 cleanup
