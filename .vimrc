@@ -603,8 +603,11 @@ NeoBundle "Shougo/vimfiler.vim"
 " :e . でVimFilerを開く
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
+
 " DB接続
 NeoBundle "vim-scripts/dbext.vim"
+let g:dbext_default_history_file = '~/.dbext_history'
 source ~/.dbextrc
 
 " URLをブラウザで開く
