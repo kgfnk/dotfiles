@@ -1,7 +1,9 @@
 " [vim] vimrc version 7.3
 version 7.3
-" vim互換をOff
+" vi互換をOff
 set nocompatible
+
+" エンコーディング {{{
 set helplang=ja
 " Encoding
 scriptencoding=utf-8
@@ -15,243 +17,26 @@ else
 	set fileencodings=utf-8,ucs-bom,iso-2022-jp,sjis,cp932,euc-jp,cp20932
 	set fileformats=unix,dos,mac
 endif
-
-" 設定
-" Beep音を消す(ヴィジュアルベルを無効)
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
-" 行番号を表示する
-set number
-
-" 全角記号を正しく扱う
-set ambiwidth=double
-
-if has('mac')
-	"カーソルの形を変える(iTerm2用)
-	let &t_SI = "\e]50;CursorShape=1\x7"
-	let &t_EI = "\e]50;CursorShape=0\x7"
-	" ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
-	set imdisable
-else
-" インサートモードから抜けると自動的にIMEをオフにする(windows用)
-	set iminsert=2
-endif
-"バックアップファイルを作るディレクトリ
-set backupdir=~/.tmp
-"スワップファイルを作るディレクトリ
-set directory=~/.tmp
-"undoファイル
-set undodir=~/.tmp
-"ファイル内の <Tab> が対応する空白の数
-set tabstop=4
-"シフト移動幅
-set shiftwidth=4
-"閉じ括弧が入力されたとき、対応する括弧を表示する
-set showmatch
-" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
-set wildmenu
-"コマンド補完
-set wildmode=full
-" テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions+=mM
-" ルーラーを表示 (noruler:非表示)
-set ruler
-" タブや改行を表示 (list:表示)
-set list
-" どの文字でタブや改行を表示するかを設定
-set listchars=tab:»-,trail:_
-"set listchars=tab:>-,extends:<,trail:-,eol:<
-" 長い行を折り返して表示 (nowrap:折り返さない)
-set wrap
-" 常にステータス行を表示 (詳細は:he laststatus)
-set laststatus=2
-" コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
-set cmdheight=1
-" コマンドをステータス行に表示
-set showcmd
-" タイトルを表示
-set title
-" 構文ごとに色分け表示する
-syntax on
-
-" インクリメンタルサーチを使う
-set incsearch
-" 検索語にマッチした単語をハイライトする
-set hlsearch
-" 検索時に大文字小文字を区別しない
-set ignorecase
-" 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
-set smartcase
-" 自動インデント
-set autoindent
-"新しい行を作るときに高度な自動インデントを行う
-set smartindent
-
-" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
-set splitbelow
-set splitright
-
-" Vimの外部で変更されたことが判明したとき、自動的に読み直す
-set autoread
-augroup vimrc-checktime
-  autocmd!
-  autocmd BufWritePost * sleep 1
-  autocmd BufWritePost * checktime
-augroup END
-
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-set smarttab
-
-"折りたたみ設定(manual,marker,indent)
-set foldmethod=manual
-set foldlevel=1
-set foldnestmax=2
-set foldcolumn=2
-
-"CTRL-aで8進数の計算をさせない
-set nrformats-=octal
-
-"gf用にパスに含まれる文字を除外(windows)
-set isfname-=:
-
-"ウィンドウを最大化して起動
-"au GUIEnter * simalt ~x
-
-" ポップアップメニューのカラーを設定
-hi Pmenu guibg=#666666
-hi PmenuSel guibg=#8cd0d3 guifg=#666666
-hi PmenuSbar guibg=#333333
-
-set t_Co=256
-
-" tmuxのインサートモードでカーソルを変更
-if exists('$TMUX')
-	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" Visual選択で選択されたテキストが、自動的にクリップボードレジスタ "*" にコピーされる。
-"set guioptions+=a
-"横スクロール
-set guioptions+=b
-
-"カーソルラインを表示
-set cursorline
-"カーソルカラムを表示（縦線）
-set cursorcolumn
-
-" キーマップ設定 {{{
-" ペースト
-inoremap <C-v> <ESC>"*pa
-cnoremap <C-v> <C-r>+
-
-" ヴィジュアルモードで置換
-vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
-
-" バッファ切り替え
-nnoremap <C-Left> :<C-u>bp<CR>
-nnoremap <C-Right> :<C-u>bn<CR>
-nnoremap <C-Down> :<C-u>buffers<CR>
-
-nnoremap <Leader>f :<C-u>VimFilerBufferDir<CR>
-nnoremap <Leader>v :<C-u>vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
-nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
-" マーク
-"nnoremap <Space>m :marks<CR>:mark<Space>
-"
-" タブ
-" タブ切り替え
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-nnoremap <Space>t :<C-u>tabnew<CR>
-nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
-
-" vimrc再読込編集
-nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
-nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
-nnoremap <Space>, :<C-u>tabnew ~/_gvimrc<CR>
-
-" 日付入力
-inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
-inoremap <C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
-inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
-
-" insertモードを抜ける
-inoremap <C-j> <esc>
- " 検索結果のハイライトを消す
-nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
-
-" help
-au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
-au BufReadPost .vimrc map K :<C-u>exe ":help ".expand("<cword>")<CR>
-
-" 入力補助
-inoremap `` ``<Left>
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap %% %%<Left>
-
-if has('mac')
-	" ;と:を入れ替える。(英字キーボード用)
-	nnoremap ; :
-endif
-
-"エラーウインドウ
-nnoremap <silent> <Leader>] :<C-u>cn<CR>
-nnoremap <silent> <Leader>[ :<C-u>cp<CR>
-
-" ウインドウ分割時にウインドウサイズを変更
-nnoremap <silent> <S-Left>  :<C-u>5wincmd ><CR>
-nnoremap <silent> <S-Right> :<C-u>5wincmd <<CR>
-nnoremap <silent> <S-Up>    :<C-u>5wincmd -<CR>
-nnoremap <silent> <S-Down>  :<C-u>5wincmd +<CR>
-
-" ヤンクの時にクリップボードにもセットする
-set clipboard+=unnamed
-set clipboard+=autoselect
-
-" ステータスラインに文字コードと改行文字を表示
-"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-
-set rtp+=~/.vim/
-
-"set grepprg=findstr\ /nS
-"set grepprg=grep\ -nHrwi
-"set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
-set grepprg=ag\ -S
-"set grepprg=pt\ /S
-autocmd QuickFixCmdPost *grep* cwindow
-nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
-"nnoremap gr :vim <cword> % \| cw<CR>
-nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
-
 " }}}
 
-"" TODOファイル
-command! Todo edit ~/Dropbox/Memo/todo.txt
-" 一時ファイル
-command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
-
-" Vandle
-filetype off            " for vundle
-
 if has("vim_starting")
-  set rtp+=$HOME/.vim/bundle/neobundle.vim/
+  set rtp+=~/.vim/bundle/neobundle.vim/
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
-"NeoBundleFetch 'Shougo/neobundle.vim'
-"call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " プラグイン {{{
+"
+if has('win32')
+	"Windows用 vimを複数開かない
+	if has('clientserver')
+	    NeoBundle "thinca/vim-singleton"
+	    "call singleton#enable()
+	endif
+endif
+
 if !has("win32")
 	NeoBundle "yuratomo/w3m.vim"
 	let g:w3m#external_browser = 'chrome'
@@ -342,7 +127,10 @@ let s:bundle = neobundle#get('vimshell')
 function! s:bundle.hooks.on_source(bundle)
 " vimshell setting
 let g:vimshell_interactive_update_time = 10
-let g:vimshell_prompt = $USERNAME."% "
+let g:vimshell_prompt = "% "
+let g:vimshell_secondary_prompt = "> "
+let g:vimshell_user_prompt = 'getcwd()'
+let g:vimshell_right_prompt = '"m9(^Д^)"'
 endfunction
 
 nnoremap <silent> vs :tabnew<CR>:VimShell<CR>
@@ -496,7 +284,6 @@ NeoBundleLazy 'Shougo/unite.vim' , {
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
 
 NeoBundle "ujihisa/unite-colorscheme"
-"NeoBundle "tsukkee/unite-tag"
 NeoBundle "Shougo/unite-outline"
 NeoBundle "Shougo/neomru.vim"
 
@@ -653,14 +440,6 @@ let g:memolist_memo_date = "%Y-%m-%d %H:%M"
 let g:memolist_template_dir_path = "~/.vim/template/memolist"
 let g:memolist_unite_option = "-auto-preview"
 
-if has('win32')
-	"Windows用 vimを複数開かない
-	if has('clientserver')
-	    NeoBundle "thinca/vim-singleton"
-	    call singleton#enable()
-	endif
-endif
-
 NeoBundle "gcmt/wildfire.vim"
 let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
 
@@ -690,10 +469,21 @@ let Tlist_Auto_Update = 1		" 自動アップデート
 let g:xml_syntax_folding = 1
 
 NeoBundle "Lokaltog/vim-easymotion"
+let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
 map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
 map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
 nmap s <Plug>(easymotion-s2)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
 
 NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ 'depends': ['Shougo/vimproc'],
@@ -705,33 +495,25 @@ NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ ],
       \ }}
 
-"let g:alpaca_tags#config = {
-"       \ '_' : '-R --sort=yes --languages=+Ruby --languages=-js,JavaScript',
-"       \ 'js' : '--languages=+js',
-"       \ '-js' : '--languages=-js,JavaScript',
-"       \ 'vim' : '--languages=+Vim,vim',
-"       \ 'php' : '--languages=+php',
-"       \ '-vim' : '--languages=-Vim,vim',
-"       \ '-style': '--languages=-css,scss,js,JavaScript,html',
-"       \ 'scss' : '--languages=+scss --languages=-css',
-"       \ 'css' : '--languages=+css',
-"       \ 'java' : '--languages=+java $JAVA_HOME/src',
-"       \ 'ruby': '--languages=+Ruby',
-"       \ 'coffee': '--languages=+coffee',
-"       \ '-coffee': '--languages=-coffee',
-"       \ 'bundle': '--languages=+Ruby',
-"       \ 'aspvbs': '--languages=+Asp',
-"       \ }
-"
-"augroup AlpacaTags
-"  autocmd!
-"  autocmd BufWritePost Gemfile AlpacaTagsBundle
-"  autocmd BufEnter * AlpacaTagsSet
-"  " 毎回保存と同時更新する。重い場合はコメントにする。
-"  autocmd BufWritePost * AlpacaTagsUpdate
-"augroup END
+let g:alpaca_tags#config = {
+       \ '_' : '-R --sort=yes --languages=+Ruby --languages=-js,JavaScript',
+       \ 'js' : '--languages=+js',
+       \ '-js' : '--languages=-js,JavaScript',
+       \ 'vim' : '--languages=+Vim,vim',
+       \ 'php' : '--languages=+php',
+       \ '-vim' : '--languages=-Vim,vim',
+       \ '-style': '--languages=-css,scss,js,JavaScript,html',
+       \ 'scss' : '--languages=+scss --languages=-css',
+       \ 'css' : '--languages=+css',
+       \ 'java' : '--languages=+java $JAVA_HOME/src',
+       \ 'ruby': '--languages=+Ruby',
+       \ 'coffee': '--languages=+coffee',
+       \ '-coffee': '--languages=-coffee',
+       \ 'bundle': '--languages=+Ruby',
+       \ 'asp': '--languages=+asp',
+       \ }
 
-nnoremap <expr>tt  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
+nnoremap <expr>tg  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
 
 "NeoBundle "Shougo/neocomplcache-rsense.vim"
 "let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
@@ -806,6 +588,234 @@ NeoBundleCheck
 
 " }}}
 
+" 基本設定{{{
+" 行番号を表示する
+set number
+"ファイル内の <Tab> が対応する空白の数
+set tabstop=4
+"シフト移動幅
+set shiftwidth=4
+" 全角記号を正しく扱う
+set ambiwidth=double
+" Beep音を消す(ヴィジュアルベルを無効)
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" }}}
+
+if has('mac')
+	"カーソルの形を変える(iTerm2用)
+	let &t_SI = "\e]50;CursorShape=1\x7"
+	let &t_EI = "\e]50;CursorShape=0\x7"
+	" ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
+	set imdisable
+else
+" インサートモードから抜けると自動的にIMEをオフにする(windows用)
+	set iminsert=2
+endif
+"バックアップファイルを作るディレクトリ
+set backupdir=~/.tmp
+"スワップファイルを作るディレクトリ
+set directory=~/.tmp
+"undoファイル
+set undodir=~/.tmp
+"閉じ括弧が入力されたとき、対応する括弧を表示する
+set showmatch
+" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
+set wildmenu
+"コマンド補完
+set wildmode=full
+" テキスト挿入中の自動折り返しを日本語に対応させる
+set formatoptions+=mM
+"カーソルラインを表示
+set cursorline
+"カーソルカラムを表示（縦線）
+set cursorcolumn
+" ルーラーを表示 (noruler:非表示)
+set ruler
+" タブや改行を表示 (list:表示)
+set list
+" どの文字でタブや改行を表示するかを設定
+set listchars=tab:»-,trail:_
+"set listchars=tab:>-,extends:<,trail:-,eol:<
+" 長い行を折り返して表示 (nowrap:折り返さない)
+set wrap
+" 常にステータス行を表示 (詳細は:he laststatus)
+set laststatus=2
+" コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
+set cmdheight=1
+" コマンドをステータス行に表示
+set showcmd
+" タイトルを表示
+set title
+" 自動インデント
+set autoindent
+"新しい行を作るときに高度な自動インデントを行う
+set smartindent
+
+" 検索{{{
+" インクリメンタルサーチを使う
+set incsearch
+" 検索語にマッチした単語をハイライトする
+set hlsearch
+" 検索時に大文字小文字を区別しない
+set ignorecase
+" 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
+set smartcase
+"}}}
+"
+" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
+set splitbelow
+set splitright
+
+" Vimの外部で変更されたことが判明したとき、自動的に読み直す
+set autoread
+augroup vimrc-checktime
+  autocmd!
+  autocmd BufWritePost * sleep 1
+  autocmd BufWritePost * checktime
+augroup END
+
+"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+set smarttab
+
+"折りたたみ設定(manual,marker,indent)
+set foldmethod=manual
+set foldlevel=1
+set foldnestmax=2
+set foldcolumn=2
+
+"CTRL-aで8進数の計算をさせない
+set nrformats-=octal
+
+"gf用にパスに含まれる文字を除外(windows)
+set isfname-=:
+
+" GUI設定 {{{
+"ウィンドウを最大化して起動
+"au GUIEnter * simalt ~x
+
+" ポップアップメニューのカラーを設定
+hi Pmenu guibg=#666666
+hi PmenuSel guibg=#8cd0d3 guifg=#666666
+hi PmenuSbar guibg=#333333
+
+set t_Co=256
+
+" tmuxのインサートモードでカーソルを変更
+if exists('$TMUX')
+	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Visual選択で選択されたテキストが、自動的にクリップボードレジスタ "*" にコピーされる。
+"set guioptions+=a
+"横スクロール
+set guioptions+=b
+" }}}
+
+" キーマップ設定 {{{
+" ペースト
+inoremap <C-v> <ESC>"*pa
+cnoremap <C-v> <C-r>+
+
+" ヴィジュアルモードで置換
+vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
+
+" バッファ切り替え
+nnoremap <C-Left> :<C-u>bp<CR>
+nnoremap <C-Right> :<C-u>bn<CR>
+nnoremap <C-Down> :<C-u>buffers<CR>
+
+nnoremap <Leader>f :<C-u>VimFilerBufferDir<CR>
+nnoremap <Leader>v :<C-u>vsplit<CR><C-w><C-w>:ls<CR>:buffer<Space>
+nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
+" マーク
+"nnoremap <Space>m :marks<CR>:mark<Space>
+"
+" タブ
+" タブ切り替え
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+nnoremap <Space>t :<C-u>tabnew<CR>
+nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
+
+" vimrc再読込編集
+nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
+nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
+nnoremap <Space>, :<C-u>tabnew ~/_gvimrc<CR>
+
+" 日付入力
+inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
+inoremap <C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
+inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
+
+" insertモードを抜ける
+inoremap <C-j> <esc>
+ " 検索結果のハイライトを消す
+nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
+
+" help
+au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
+au BufReadPost .vimrc map K :<C-u>exe ":help ".expand("<cword>")<CR>
+
+" 入力補助
+inoremap `` ``<Left>
+inoremap <> <><Left>
+inoremap () ()<Left>
+inoremap {} {}<Left>
+inoremap [] []<Left>
+inoremap "" ""<Left>
+inoremap '' ''<Left>
+inoremap %% %%<Left>
+
+if has('mac')
+	" ;と:を入れ替える。(英字キーボード用)
+	nnoremap ; :
+endif
+
+"エラーウインドウ
+nnoremap <silent> <Leader>] :<C-u>cn<CR>
+nnoremap <silent> <Leader>[ :<C-u>cp<CR>
+
+" ウインドウ分割時にウインドウサイズを変更
+nnoremap <silent> <S-Left>  :<C-u>5wincmd ><CR>
+nnoremap <silent> <S-Right> :<C-u>5wincmd <<CR>
+nnoremap <silent> <S-Up>    :<C-u>5wincmd -<CR>
+nnoremap <silent> <S-Down>  :<C-u>5wincmd +<CR>
+
+" ヤンクの時にクリップボードにもセットする
+set clipboard+=unnamed
+set clipboard+=autoselect
+
+" ステータスラインに文字コードと改行文字を表示
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
+set rtp+=~/.vim/
+
+"set grepprg=findstr\ /nS
+"set grepprg=grep\ -nHrwi
+"set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
+set grepprg=ag\ -S
+"set grepprg=pt\ /S
+autocmd QuickFixCmdPost *grep* cwindow
+nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
+"nnoremap gr :vim <cword> % \| cw<CR>
+nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
+
+" }}}
+
+"" TODOファイル
+command! Todo edit ~/Dropbox/Memo/todo.txt
+" 一時ファイル
+command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
+
+" Vandle
+filetype off            " for vundle
+
 " Enable omni completion.
 autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -815,6 +825,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " 注意: この内容は:filetype onよりも後に記述すること。
 
+" 構文ごとに色分け表示する
 syntax enable
 set background=dark
 colorscheme solarized
