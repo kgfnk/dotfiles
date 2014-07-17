@@ -21,11 +21,10 @@ endif
 
 if has("vim_starting")
   set rtp+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim'
 call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " プラグイン {{{
 "
@@ -128,9 +127,9 @@ function! s:bundle.hooks.on_source(bundle)
 " vimshell setting
 let g:vimshell_interactive_update_time = 10
 let g:vimshell_prompt = "% "
-let g:vimshell_secondary_prompt = "> "
-let g:vimshell_user_prompt = 'getcwd()'
-let g:vimshell_right_prompt = '"m9(^Д^)"'
+"let g:vimshell_secondary_prompt = "> "
+"let g:vimshell_user_prompt = 'getcwd()'
+"let g:vimshell_right_prompt = "getcwd()"
 endfunction
 
 nnoremap <silent> vs :tabnew<CR>:VimShell<CR>
@@ -295,6 +294,7 @@ let g:unite_enable_split_vertically = 1 "縦分割で開く
 let g:unite_winwidth = 40 "横幅40で開く
 let g:unite_source_find_command="find.exe"
 endfunction
+
 " ESCキーを2回押すとバッファを終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
@@ -311,6 +311,8 @@ nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
 nnoremap <silent> [unite]d :<C-u>Unite<Space>directory_mru<CR>
 "バッファ
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+" ブックマーク
+nnoremap <silent> [unite]bk :<C-u>Unite<Space>bookmark<CR>
 "レジスタ
 nnoremap <silent> [unite]r :<C-u>Unite<Space>register<CR>
 "タブ
@@ -334,6 +336,13 @@ nnoremap <silent> [unite]gr  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 " grep検索結果の再呼出
 nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+" vim command 一覧
+noremap :<CR> :<C-u>Unite command mapping<CR>
+" 過去に使ったファイル一覧
+noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+nnoremap <expr>tg  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
+
+
 
 " unite grep に ag(The Silver Searcher) を使う
 if executable('ag')
@@ -356,11 +365,6 @@ autocmd BufEnter *
 \   if empty(&buftype)
 \|      nnoremap <buffer> g<C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
 \|  endif
-
-" vim command 一覧
-noremap :<CR> :<C-u>Unite command mapping<CR>
-" 過去に使ったファイル一覧
-noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 
 " path にヘッダーファイルのディレクトリを追加することで
 " neocomplcache が include 時に tag ファイルを作成してくれる
@@ -385,7 +389,7 @@ NeoBundle "Shougo/vimfiler.vim"
 " :e . でVimFilerを開く
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
+"let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
 
 " DB接続
 NeoBundle "vim-scripts/dbext.vim"
@@ -512,8 +516,6 @@ let g:alpaca_tags#config = {
        \ 'bundle': '--languages=+Ruby',
        \ 'asp': '--languages=+asp',
        \ }
-
-nnoremap <expr>tg  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
 
 "NeoBundle "Shougo/neocomplcache-rsense.vim"
 "let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
