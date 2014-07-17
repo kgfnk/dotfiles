@@ -496,7 +496,7 @@ NeoBundleLazy 'Shougo/unite.vim' , {
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
 
 NeoBundle "ujihisa/unite-colorscheme"
-NeoBundle "tsukkee/unite-tag"
+"NeoBundle "tsukkee/unite-tag"
 NeoBundle "Shougo/unite-outline"
 NeoBundle "Shougo/neomru.vim"
 
