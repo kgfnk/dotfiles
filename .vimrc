@@ -285,6 +285,7 @@ let g:unite_source_history_yank_enable =1  "history/yankの有効化
 NeoBundle "ujihisa/unite-colorscheme"
 NeoBundle "Shougo/unite-outline"
 NeoBundle "Shougo/neomru.vim"
+NeoBundle 'sgur/unite-qf'
 
 let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
@@ -292,7 +293,9 @@ function! s:bundle.hooks.on_source(bundle)
 let g:unite_enable_start_insert=1
 let g:unite_enable_split_vertically = 1 "縦分割で開く
 let g:unite_winwidth = 40 "横幅40で開く
-let g:unite_source_find_command="find.exe"
+if has('win32') Then
+	let g:unite_source_find_command="find.exe"
+endif
 endfunction
 
 " ESCキーを2回押すとバッファを終了する
