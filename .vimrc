@@ -1,10 +1,10 @@
-" [vim] vimrc version 7.3
-version 7.3
 " vi互換をOff
 set nocompatible
+set helplang=ja
+
+set rtp+=~/.vim/
 
 " エンコーディング {{{
-set helplang=ja
 " Encoding
 scriptencoding=utf-8
 set encoding=utf-8
@@ -19,6 +19,11 @@ else
 endif
 " }}}
 
+" プラグイン {{{
+"ファイルタイプ関連を無効
+filetype off
+filetype plugin indent off
+
 if has("vim_starting")
   set rtp+=~/.vim/bundle/neobundle.vim/
 endif
@@ -26,27 +31,21 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" プラグイン {{{
-"
-if has('win32')
-	"Windows用 vimを複数開かない
-	if has('clientserver')
-	    NeoBundle "thinca/vim-singleton"
-	    "call singleton#enable()
-	endif
-endif
-
 if !has("win32")
 	NeoBundle "yuratomo/w3m.vim"
+	" w3m.vim {{{
 	let g:w3m#external_browser = 'chrome'
 	let g:w3m#homepage = 'http://www.google.co.jp/'
+	" }}}
 endif
 
 " 日本語整形スクリプト用の設定
 NeoBundle "vim-scripts/format.vim"
+"format.vim{{{
 let format_allow_over_tw = 1	" ぶら下り可能幅
-
+"}}}
 NeoBundle "thinca/vim-quickrun"
+" vim-quickrun {{{
 let g:quickrun_config = {}
 let g:quickrun_config={
 \ "-": {
@@ -65,21 +64,25 @@ let g:quickrun_config={
 \   "outputter": "browser"
 \ },
 \}
-
+" }}}
 NeoBundle "Markdown"
 NeoBundle "tpope/vim-markdown"
 NeoBundle "thinca/vim-ref"
+" vim-ref {{{
 autocmd FileType ruby,eruby nnoremap <silent> K :<C-u>Ref refe <cword><CR>
-
+"}}}
 NeoBundle "vim-ruby/vim-ruby"
 NeoBundle "tpope/vim-rails"
 " 日付のインクリメント
 NeoBundle "tpope/vim-speeddating"
 NeoBundle "tpope/vim-surround"
+" vim-surround {{{
 nmap <Leader>s ysiw		"文字で囲む
 nmap <Leader>st ysst	"タグで囲む(インライン)
 nmap <Leader>sT ySSt	"タグで囲む(ブロック)
+" }}}
 NeoBundle "mattn/emmet-vim"
+" emmet-vim {{{
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 "let g:user_emmet_leader_key = '<C-,>'
@@ -88,7 +91,9 @@ let g:user_emmet_settings = {
 \  'lang' : 'ja'
 \}
 "let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_custom.json')), "\n"))
+" }}}
 NeoBundle "mrtazz/simplenote.vim"
+" simplenote {{{
 "ID/PASSは別ファイルで定義
 "let g:SimplenoteUsername = ""
 "let g:SimplenotePassword = ""
@@ -96,16 +101,9 @@ source ~/.simplenoterc
 let g:SimplenoteVertical=1
 let g:SimplenoteFiletype="markdown"
 let g:SimplenoteListHeight=30
-
-NeoBundle "pangloss/vim-javascript"
-NeoBundle "vim-scripts/Better-Javascript-Indentation"
+" }}}
 NeoBundle "altercation/vim-colors-solarized"
-NeoBundle "tomasr/molokai"
-let g:molokai_original = 1
-let g:rehash256 = 1
-NeoBundle "vim-scripts/pyte"
-NeoBundle "jnurmine/Zenburn"
-
+" vim-colors-solarized {{{
 if !has('win32')
 NeoBundle "Shougo/vimproc", {
   \ 'build' : {
@@ -116,27 +114,26 @@ NeoBundle "Shougo/vimproc", {
   \ },
   \ }
 endif
-
+" }}}
 NeoBundleLazy 'Shougo/vimshell', {
 \   'autoload' : { 'commands' : [ 'VimShellBufferDir', 'VimShell', 'VimShellPop' ] },
 \   'depends': [ 'Shougo/vimproc' ],
 \ }
-
+" vimshell {{{
 let s:bundle = neobundle#get('vimshell')
 function! s:bundle.hooks.on_source(bundle)
-" vimshell setting
-let g:vimshell_interactive_update_time = 10
-let g:vimshell_prompt = "% "
-"let g:vimshell_secondary_prompt = "> "
-"let g:vimshell_user_prompt = 'getcwd()'
-"let g:vimshell_right_prompt = "getcwd()"
+	" vimshell setting
+	let g:vimshell_interactive_update_time = 10
+	let g:vimshell_prompt = "% "
+	"let g:vimshell_secondary_prompt = "> "
+	"let g:vimshell_user_prompt = 'getcwd()'
+	"let g:vimshell_right_prompt = "getcwd()"
 endfunction
-
 nnoremap <silent> vs :tabnew<CR>:VimShell<CR>
 nnoremap <silent> vp :VimShellPop<CR>
-
+"}}}
 NeoBundle "Shougo/neocomplete.vim"
-
+" neocomplete {{{
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -229,13 +226,6 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
@@ -247,8 +237,9 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
+" }}}
 NeoBundle "Shougo/neosnippet"
+" neosnippet {{{
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -268,34 +259,29 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-
+"}}}
 NeoBundle "Shougo/neosnippet-snippets"
+"neosnippet-snippets {{{
 let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets, ~/.vim/snippets'
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['html'] = 'html,javascript,jquery,css'
 let g:neosnippet#scope_aliases['javascript'] = 'javascript,jquery'
 let g:neosnippet#scope_aliases['aspvbs'] = 'html,javascript,jquery,css'
-
+"}}}
 NeoBundleLazy 'Shougo/unite.vim' , {
 \   'autoload' : { 'commands' : [ 'Unite', 'UniteWithBufferDir', 'UniteResume' ] }
 \ }
-" uniteの設定 ======================================
+" unite.vim {{{
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
-
-NeoBundle "ujihisa/unite-colorscheme"
-NeoBundle "Shougo/unite-outline"
-NeoBundle "Shougo/neomru.vim"
-NeoBundle 'sgur/unite-qf'
-
 let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-let g:unite_enable_split_vertically = 1 "縦分割で開く
-let g:unite_winwidth = 40 "横幅40で開く
-if has('win32') Then
-	let g:unite_source_find_command="find.exe"
-endif
+	" 入力モードで開始する
+	let g:unite_enable_start_insert=1
+	let g:unite_enable_split_vertically = 1 "縦分割で開く
+	let g:unite_winwidth = 40 "横幅40で開く
+	if has('win32')
+		let g:unite_source_find_command="find.exe"
+	endif
 endfunction
 
 " ESCキーを2回押すとバッファを終了する
@@ -345,8 +331,6 @@ noremap :<CR> :<C-u>Unite command mapping<CR>
 noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 nnoremap <expr>tg  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR>'
 
-
-
 " unite grep に ag(The Silver Searcher) を使う
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
@@ -359,11 +343,17 @@ endif
 "  let g:unite_source_grep_recursive_opt = ''
 "  let g:unite_source_grep_encoding = 'utf-8'
 "endif
-
+"}}}
+NeoBundle "Shougo/neomru.vim"
+NeoBundle "ujihisa/unite-colorscheme"
+NeoBundle "Shougo/unite-outline"
+NeoBundle 'sgur/unite-qf'
 NeoBundle "fuenor/qfixgrep"
+" qfixgrep {{{
 let mygrepprg = 'grep'
-
+"}}}
 NeoBundle "tsukkee/unite-tag"
+" unite-tag{{{
 autocmd BufEnter *
 \   if empty(&buftype)
 \|      nnoremap <buffer> g<C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
@@ -385,97 +375,108 @@ autocmd BufEnter *
 \   if empty(&buftype)
 \|      nnoremap <buffer> g<C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
 \|  endif
-NeoBundle "taku-o/vim-toggle"
-let g:toggle_pairs = { 'and':'or', 'or':'and' }
+"}}}
 NeoBundle "hallettj/jslint.vim"
 NeoBundle "Shougo/vimfiler.vim"
+" vimfiler {{{
 " :e . でVimFilerを開く
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
 "let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
-
+"}}}
 " DB接続
 NeoBundle "vim-scripts/dbext.vim"
+" dbext {{{
 let g:dbext_default_history_file = '~/.dbext_history'
 source ~/.dbextrc
-
+" }}}
 " URLをブラウザで開く
 NeoBundle "tyru/open-browser.vim"
+" open-browser {{{
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-
+" }}}
 NeoBundle "vim-scripts/aspvbs.vim"
 NeoBundle "rking/ag.vim"
 NeoBundle "thinca/vim-qfreplace"
-"NeoBundle "scrooloose/syntastic"
-"let g:syntastic_enable_signs=1
-"let g:syntastic_auto_loc_list=1
-"let g:syntastic_html_validator_parser='html5'
-
+NeoBundle "scrooloose/syntastic"
+"syntastic{{{
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+"}}}
 NeoBundle "vim-scripts/DirDiff.vim"
 NeoBundle "itchyny/lightline.vim"
+"lightline.vim{{{
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }
-"NeoBundle "Lokaltog/vim-powerline"
-"let g:Powerline_symbols='fancy'
+"}}}
 " Syntax
+" html5
 "NeoBundle "othree/html5.vim"
 "NeoBundle "taichouchou2/html5.vim"
-
+" javascript
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "vim-scripts/Better-Javascript-Indentation"
 " sass
 NeoBundle "AtsushiM/sass-compile.vim"
 NeoBundle "cakebaker/scss-syntax.vim"
 
 " git
 NeoBundle "tpope/vim-fugitive"
-
+NeoBundle "mattn/gist-vim"
+"gist-vim{{{
+let g:github_user  = 'kgfnk'
+let g:gist_private = 1
+let g:gist_post_private = 1
+let g:gist_detect_filetype = 1
+"}}}
+NeoBundle 'lambdalisue/vim-gista'
+"vim-gista{{{
+let g:gista#github_user = 'kgfnk'
+"}}}
 " BLog、メモ用
 NeoBundle "csexton/jekyll.vim"
+"jekyll.vim{{{
 let g:jekyll_path = "~/webdottech"
 let g:jekyll_post_suffix = "md"
 map <Leader>jb  :<C-u>JekyllBuild<CR>
 map <Leader>jn  :<C-u>JekyllPost<CR>
 map <Leader>jl  :<C-u>JekyllList<CR>
-
+"}}}
 NeoBundle "glidenote/memolist.vim"
+"memolist.vim{{{
 let g:memolist_path = "~/Dropbox/Memo"
 let g:memolist_memo_suffix = "md"
 let g:memolist_unite        = 1
 let g:memolist_memo_date = "%Y-%m-%d %H:%M"
 let g:memolist_template_dir_path = "~/.vim/template/memolist"
 let g:memolist_unite_option = "-auto-preview"
-
+"}}}
+"移動、選択
 NeoBundle "gcmt/wildfire.vim"
+"wildfire.vim{{{
 let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
-
+"}}}
 NeoBundle "mattn/webapi-vim"
-NeoBundle "mattn/gist-vim"
-let g:github_user  = 'kgfnk'
-let g:gist_private = 1
-let g:gist_post_private = 1
-let g:gist_detect_filetype = 1
-
-NeoBundle 'lambdalisue/vim-gista'
-let g:gista#github_user = 'kgfnk'
-
 "NeoBundle "vim-scripts/grep.vim"
 NeoBundle "vim-scripts/taglist.vim"
-
+"taglist.vim{{{
 if has('win32')
 	let Tlist_Ctags_Cmd = 'C:\bin\ctags.exe'
 else
 	let TList_Ctags_Cmd = "/usr/local/bin/ctags"
 endif
-
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_Open = 1
 let Tlist_Enable_Fold_Column = 1	"折りたたみ
 let Tlist_Auto_Update = 1		" 自動アップデート
 let g:xml_syntax_folding = 1
-
+nnoremap <silent> <F8> :TlistToggle<CR>
+"}}}
 NeoBundle "Lokaltog/vim-easymotion"
+"vim_easymotion {{{
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
 let g:EasyMotion_smartcase = 1
@@ -491,7 +492,7 @@ map <Leader>k <Plug>(easymotion-k)
 nmap g/ <Plug>(easymotion-sn)
 xmap g/ <Plug>(easymotion-sn)
 omap g/ <Plug>(easymotion-tn)
-
+"}}}
 NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ 'depends': ['Shougo/vimproc'],
       \ 'autoload' : {
@@ -501,7 +502,7 @@ NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
       \ ],
       \ }}
-
+" alpaca_tags {{{
 let g:alpaca_tags#config = {
        \ '_' : '-R --sort=yes --languages=+Ruby --languages=-js,JavaScript',
        \ 'js' : '--languages=+js',
@@ -519,32 +520,34 @@ let g:alpaca_tags#config = {
        \ 'bundle': '--languages=+Ruby',
        \ 'asp': '--languages=+asp',
        \ }
-
+"}}}
 "NeoBundle "Shougo/neocomplcache-rsense.vim"
 "let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
 "let g:rsenseUseOmniFunc = 1
-
 NeoBundle "vim-scripts/Align"
+"Aplign{{{
 let g:Align_xstrlen = 3
+"}}}
 NeoBundle "vim-scripts/SQLUtilities"
+"SQLUtilities {{{
 let g:sqlutil_align_where = 1
 let g:sqlutil_align_comma = 1
 let g:sqlutil_align_first_word = 1
 let g:sqlutil_align_keyword_right = 1
 let g:sqlutil_keyword_case = '\U'
-
+"}}}
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 "NeoBundle 'tomtom/tcomment_vim'
-
 NeoBundle 'othree/eregex.vim'
+"eregex.vim {{{
 let g:eregex_default_enable = 0
 let g:eregex_forward_delim = '/'
 let g:eregex_backward_delim = '?'
-
+"}}}
 NeoBundle "AndrewRadev/switch.vim"
+"switch.vim {{{
 nnoremap - :Switch<cr>
-
 let g:switch_custom_definitions = [
 \   ['on', 'off'],
 \   ['and', 'or'],
@@ -553,7 +556,6 @@ let g:switch_custom_definitions = [
 \   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 \   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 \ ]
-
 let b:switch_custom_definitions = [
 \   {
 \     '\<[a-z0-9]\+_\k\+\>': {
@@ -569,7 +571,6 @@ let b:switch_custom_definitions = [
 \        '"\(.\{-}\)"'  :   '\1',
 \   },
 \ ]
-
 " foo_bar → fooBar → foo_bar
 let g:variable_style_switch_definitions = [
 \   {
@@ -582,7 +583,7 @@ let g:variable_style_switch_definitions = [
 \   }
 \ ]
 nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
-
+"}}}
 NeoBundle "kien/ctrlp.vim"
 
 call neobundle#end()
@@ -605,13 +606,12 @@ set ambiwidth=double
 " Beep音を消す(ヴィジュアルベルを無効)
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
-
-" }}}
-
 if has('mac')
 	"カーソルの形を変える(iTerm2用)
 	let &t_SI = "\e]50;CursorShape=1\x7"
 	let &t_EI = "\e]50;CursorShape=0\x7"
+endif
+if has('mac')
 	" ノーマルモードに戻った時に日本語入力をオフにする(MAC用)
 	set imdisable
 else
@@ -624,14 +624,35 @@ set backupdir=~/.tmp
 set directory=~/.tmp
 "undoファイル
 set undodir=~/.tmp
-"閉じ括弧が入力されたとき、対応する括弧を表示する
-set showmatch
+"折りたたみ設定(manual,marker,indent)
+set foldmethod=manual
+set foldlevel=1
+set foldnestmax=2
+set foldcolumn=2
+"CTRL-aで8進数の計算をさせない
+set nrformats-=octal
+"gf用にパスに含まれる文字を除外(windows)
+set isfname-=:
+
+" Vimの外部で変更されたことが判明したとき、自動的に読み直す
+set autoread
+augroup vimrc-checktime
+  autocmd!
+  autocmd BufWritePost * sleep 1
+  autocmd BufWritePost * checktime
+augroup END
+
+" }}}
+
+" 見栄え{{{
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
 "コマンド補完
 set wildmode=full
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
+"閉じ括弧が入力されたとき、対応する括弧を表示する
+set showmatch
 "カーソルラインを表示
 set cursorline
 "カーソルカラムを表示（縦線）
@@ -653,10 +674,19 @@ set cmdheight=1
 set showcmd
 " タイトルを表示
 set title
+" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
+set splitbelow
+set splitright
+" }}}
+
+" インデント {{{
 " 自動インデント
 set autoindent
 "新しい行を作るときに高度な自動インデントを行う
 set smartindent
+"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+set smarttab
+" }}}
 
 " 検索{{{
 " インクリメンタルサーチを使う
@@ -668,33 +698,6 @@ set ignorecase
 " 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
 set smartcase
 "}}}
-"
-" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
-set splitbelow
-set splitright
-
-" Vimの外部で変更されたことが判明したとき、自動的に読み直す
-set autoread
-augroup vimrc-checktime
-  autocmd!
-  autocmd BufWritePost * sleep 1
-  autocmd BufWritePost * checktime
-augroup END
-
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-set smarttab
-
-"折りたたみ設定(manual,marker,indent)
-set foldmethod=manual
-set foldlevel=1
-set foldnestmax=2
-set foldcolumn=2
-
-"CTRL-aで8進数の計算をさせない
-set nrformats-=octal
-
-"gf用にパスに含まれる文字を除外(windows)
-set isfname-=:
 
 " GUI設定 {{{
 "ウィンドウを最大化して起動
@@ -777,6 +780,10 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
 
+" 連続インデント
+vnoremap < <gv
+vnoremap > >gv
+
 if has('mac')
 	" ;と:を入れ替える。(英字キーボード用)
 	nnoremap ; :
@@ -799,8 +806,6 @@ set clipboard+=autoselect
 " ステータスラインに文字コードと改行文字を表示
 "set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
-set rtp+=~/.vim/
-
 "set grepprg=findstr\ /nS
 "set grepprg=grep\ -nHrwi
 "set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
@@ -811,28 +816,26 @@ nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
 "nnoremap gr :vim <cword> % \| cw<CR>
 nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
 
-" }}}
-
 "" TODOファイル
 command! Todo edit ~/Dropbox/Memo/todo.txt
 " 一時ファイル
 command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
 
-" Vandle
-filetype off            " for vundle
+" }}}
 
-" Enable omni completion.
+" オムニ補完 {{{
 autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" 注意: この内容は:filetype onよりも後に記述すること。
+" }}}
 
+" カラースキーム{{{
 " 構文ごとに色分け表示する
 syntax enable
 set background=dark
 colorscheme solarized
-
+" }}}
 " vim:set ft=vim foldmethod=marker:
