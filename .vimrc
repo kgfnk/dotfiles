@@ -134,7 +134,7 @@ nnoremap <silent> vp :VimShellPop<CR>
 "}}}
 NeoBundle "Shougo/neocomplete.vim"
 " neocomplete {{{
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+"Note: This option must set it in .vimrc(.vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -198,14 +198,14 @@ function! s:my_cr_function()
   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup() 
 " Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
 "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -242,18 +242,18 @@ NeoBundle "Shougo/neosnippet"
 " neosnippet {{{
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
+"inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)"
+"\: pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)"
+"\: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -552,6 +552,7 @@ let g:switch_custom_definitions = [
 \   ['on', 'off'],
 \   ['and', 'or'],
 \   ['start', 'end'],
+\   ['○', '×'],
 \   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
 \   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 \   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -633,7 +634,6 @@ set foldcolumn=2
 set nrformats-=octal
 "gf用にパスに含まれる文字を除外(windows)
 set isfname-=:
-
 " Vimの外部で変更されたことが判明したとき、自動的に読み直す
 set autoread
 augroup vimrc-checktime
@@ -641,7 +641,6 @@ augroup vimrc-checktime
   autocmd BufWritePost * sleep 1
   autocmd BufWritePost * checktime
 augroup END
-
 " }}}
 
 " 見栄え{{{
@@ -702,12 +701,10 @@ set smartcase
 " GUI設定 {{{
 "ウィンドウを最大化して起動
 "au GUIEnter * simalt ~x
-
 " ポップアップメニューのカラーを設定
 hi Pmenu guibg=#666666
 hi PmenuSel guibg=#8cd0d3 guifg=#666666
 hi PmenuSbar guibg=#333333
-
 set t_Co=256
 
 " tmuxのインサートモードでカーソルを変更
@@ -752,9 +749,9 @@ nnoremap <Space>t :<C-u>tabnew<CR>
 nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
 
 " vimrc再読込編集
-nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
-nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
-nnoremap <Space>, :<C-u>tabnew ~/_gvimrc<CR>
+nnoremap <Space>s :<C-u>source ~/.vimrc<CR> :<C-u>source ~/.gvimrc<CR>
+nnoremap <Space>. :<C-u>tabnew ~/.vimrc<CR>
+nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 
 " 日付入力
 inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
