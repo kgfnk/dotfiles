@@ -102,19 +102,16 @@ let g:SimplenoteVertical=1
 let g:SimplenoteFiletype="markdown"
 let g:SimplenoteListHeight=30
 " }}}
-NeoBundle "altercation/vim-colors-solarized"
-" vim-colors-solarized {{{
 if !has('win32')
 NeoBundle "Shougo/vimproc", {
   \ 'build' : {
-"    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'windows' : 'make -f make_mingw32.mak',
     \ 'cygwin' : 'make -f make_cygwin.mak',
     \ 'mac' : 'make -f make_mac.mak',
     \ 'unix' : 'make -f make_unix.mak',
   \ },
   \ }
 endif
-" }}}
 NeoBundleLazy 'Shougo/vimshell', {
 \   'autoload' : { 'commands' : [ 'VimShellBufferDir', 'VimShell', 'VimShellPop' ] },
 \   'depends': [ 'Shougo/vimproc' ],
@@ -405,6 +402,9 @@ NeoBundle "scrooloose/syntastic"
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 "}}}
+NeoBundle "altercation/vim-colors-solarized"
+" vim-colors-solarized {{{
+" }}}
 NeoBundle "vim-scripts/DirDiff.vim"
 NeoBundle "itchyny/lightline.vim"
 "lightline.vim{{{
@@ -752,9 +752,9 @@ nnoremap <Space>t :<C-u>tabnew<CR>
 nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
 
 " vimrc再読込編集
-nnoremap <Space>s :<C-u>source ~/_vimrc<CR> :<C-u>source ~/_gvimrc<CR>
-nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
-nnoremap <Space>, :<C-u>tabnew ~/_gvimrc<CR>
+nnoremap <Space>s :<C-u>source ~/.vimrc<CR> :<C-u>source ~/.gvimrc<CR>
+nnoremap <Space>. :<C-u>tabnew ~/.vimrc<CR>
+nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 
 " 日付入力
 inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
