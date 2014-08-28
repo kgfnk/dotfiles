@@ -205,7 +205,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup() 
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
 "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -248,12 +248,12 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 "inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)"
-"\: pumvisible() ? "\<C-n>" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)"
-"\: "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -278,7 +278,7 @@ function! s:bundle.hooks.on_source(bundle)
 	" 入力モードで開始する
 	let g:unite_enable_start_insert=1
 	let g:unite_enable_split_vertically = 1 "縦分割で開く
-	let g:unite_winwidth = 40 "横幅40で開く
+	let g:unite_winwidth = 45 "ウインドウの横幅設定
 	if has('win32')
 		let g:unite_source_find_command="find.exe"
 	endif
@@ -314,6 +314,8 @@ nnoremap <silent> [unite]m :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 "file_rec:!
 nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec:!<CR>
+"gista
+nnoremap <silent> [unite]g :<C-u>Unite<Space>gista<CR>
 
 " 大文字小文字を区別しない
 let g:unite_enable_ignore_case = 1
@@ -425,16 +427,24 @@ NeoBundle "cakebaker/scss-syntax.vim"
 
 " git
 NeoBundle "tpope/vim-fugitive"
-NeoBundle "mattn/gist-vim"
-"gist-vim{{{
-let g:github_user  = 'kgfnk'
-let g:gist_private = 1
-let g:gist_post_private = 1
-let g:gist_detect_filetype = 1
-"}}}
-NeoBundle 'lambdalisue/vim-gista'
+"NeoBundle "mattn/gist-vim"
+""gist-vim{{{
+"let g:github_user  = 'kgfnk'
+"let g:gist_private = 1
+"let g:gist_post_private = 1
+"let g:gist_detect_filetype = 1
+""}}}
+NeoBundle 'lambdalisue/vim-gista', {
+    \ 'depends': [
+    \    'Shougo/unite.vim',
+    \    'tyru/open-browser.vim',
+    \]}
 "vim-gista{{{
 let g:gista#github_user = 'kgfnk'
+let g:gista#update_on_write = 1
+"windowsの場合パスの都合でエラーになるので以下を設定する。
+let g:gista#directory = '~/.gista'
+let g:gista#post_private = 1
 "}}}
 " BLog、メモ用
 NeoBundle "csexton/jekyll.vim"
