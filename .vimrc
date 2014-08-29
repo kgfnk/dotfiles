@@ -412,6 +412,10 @@ NeoBundle "itchyny/lightline.vim"
 "lightline.vim{{{
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'component': {
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'subseparator': { 'left': "〉", 'right': "〈" }
       \ }
 "}}}
 " Syntax
@@ -427,6 +431,7 @@ NeoBundle "cakebaker/scss-syntax.vim"
 
 " git
 NeoBundle "tpope/vim-fugitive"
+
 "NeoBundle "mattn/gist-vim"
 ""gist-vim{{{
 "let g:github_user  = 'kgfnk'
