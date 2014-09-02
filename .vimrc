@@ -412,6 +412,10 @@ NeoBundle "itchyny/lightline.vim"
 "lightline.vim{{{
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'component': {
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'subseparator': { 'left': "〉", 'right': "〈" }
       \ }
 "}}}
 " Syntax
@@ -427,6 +431,7 @@ NeoBundle "cakebaker/scss-syntax.vim"
 
 " git
 NeoBundle "tpope/vim-fugitive"
+
 "NeoBundle "mattn/gist-vim"
 ""gist-vim{{{
 "let g:github_user  = 'kgfnk'
@@ -595,7 +600,16 @@ let g:variable_style_switch_definitions = [
 \ ]
 nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
 "}}}
+"ctrlp.vim{{{
 NeoBundle "kien/ctrlp.vim"
+"}}}
+"gundo.vim{{{
+NeoBundle "sjl/gundo.vim"
+"}}}
+NeoBundleLazy "vim-scripts/TaskList.vim", {
+      \ "autoload": {
+      \   "mappings": ['<Plug>TaskList'],
+      \}}
 
 call neobundle#end()
 
@@ -828,6 +842,10 @@ command! Todo edit ~/Dropbox/Memo/todo.txt
 " 一時ファイル
 command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
 
+"undo履歴表示
+nmap U :<C-u>GundoToggle<CR>
+" TODOリスト表示
+nmap <Leader>T <plug>TaskList
 " }}}
 
 " オムニ補完 {{{
