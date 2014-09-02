@@ -12,8 +12,11 @@ upgrade
 tap homebrew/dupes
 #最新バージョンのFormula
 tap homebrew/versions
+#バイナリ配布用
+tap homebrew/binary
 # cask
 tap phinze/homebrew-cask
+tap caskroom/cask
 #---
 # パッケージのインストール
 #---
@@ -28,7 +31,8 @@ install git
 install openssl
 install readline
 install zsh-completions
-install brew-cask
+#install brew-cask
+install caskroom/cask/brew-cask
 install markdown
 install ag
 install ctags
@@ -58,7 +62,7 @@ cask install skitch --force
 cask install iterm2 --force
 cask install sublime-text --force
 cask install bettertouchtool --force
-cask install keyremap4macbook --force
+cask install karabiner --force
 cask install cheatsheet --force
 cask install kobito --force
 cask install alfred --force
