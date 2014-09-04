@@ -327,6 +327,7 @@ nnoremap <silent> [unite]gr  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 " grep検索結果の再呼出
 nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+nnoremap <silent> [unite]R  :<C-u>UniteResume<CR>
 " vim command 一覧
 noremap :<CR> :<C-u>Unite command mapping<CR>
 " 過去に使ったファイル一覧
@@ -412,7 +413,13 @@ NeoBundle "itchyny/lightline.vim"
 "lightline.vim{{{
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
       \ 'component': {
+      \   'readonly': '%{&readonly?"×":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
       \ },
       \ 'subseparator': { 'left': "〉", 'right': "〈" }
@@ -430,7 +437,9 @@ NeoBundle "AtsushiM/sass-compile.vim"
 NeoBundle "cakebaker/scss-syntax.vim"
 
 " git
+" fugitive{{{
 NeoBundle "tpope/vim-fugitive"
+"}}}
 
 "NeoBundle "mattn/gist-vim"
 ""gist-vim{{{
@@ -603,6 +612,18 @@ nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
 "ctrlp.vim{{{
 NeoBundle "kien/ctrlp.vim"
 "}}}
+"NeoBundle "vim-scripts/YankRing.vim"
+NeoBundle "LeafCage/yankround.vim"
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+nnoremap <silent><SID>(ctrlp) :<C-u>CtrlP<CR>
+nmap <expr><C-p> yankround#is_active() ? "\<Plug>(yankround-prev)" : "<SID>(ctrlp)"
 "gundo.vim{{{
 NeoBundle "sjl/gundo.vim"
 "}}}
@@ -610,7 +631,6 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
       \ "autoload": {
       \   "mappings": ['<Plug>TaskList'],
       \}}
-
 call neobundle#end()
 
 filetype plugin indent on
@@ -665,6 +685,13 @@ augroup vimrc-checktime
   autocmd BufWritePost * sleep 1
   autocmd BufWritePost * checktime
 augroup END
+
+" 行を跨いで移動出来るようにする
+set whichwrap=b,s,h,l,<,>,[,],~
+
+" インサートモードから抜ける時にnopasteに変更
+" set paste
+autocmd InsertLeave * set nopaste
 " }}}
 
 " 見栄え{{{
@@ -709,6 +736,8 @@ set autoindent
 set smartindent
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
+" 文字のないところにカーソル移動できるようにする
+set virtualedit=block
 " }}}
 
 " 検索{{{
