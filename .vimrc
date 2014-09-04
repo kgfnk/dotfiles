@@ -102,19 +102,16 @@ let g:SimplenoteVertical=1
 let g:SimplenoteFiletype="markdown"
 let g:SimplenoteListHeight=30
 " }}}
-NeoBundle "altercation/vim-colors-solarized"
-" vim-colors-solarized {{{
 if !has('win32')
 NeoBundle "Shougo/vimproc", {
   \ 'build' : {
-"    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'windows' : 'make -f make_mingw32.mak',
     \ 'cygwin' : 'make -f make_cygwin.mak',
     \ 'mac' : 'make -f make_mac.mak',
     \ 'unix' : 'make -f make_unix.mak',
   \ },
   \ }
 endif
-" }}}
 NeoBundleLazy 'Shougo/vimshell', {
 \   'autoload' : { 'commands' : [ 'VimShellBufferDir', 'VimShell', 'VimShellPop' ] },
 \   'depends': [ 'Shougo/vimproc' ],
@@ -408,6 +405,9 @@ NeoBundle "scrooloose/syntastic"
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 "}}}
+NeoBundle "altercation/vim-colors-solarized"
+" vim-colors-solarized {{{
+" }}}
 NeoBundle "vim-scripts/DirDiff.vim"
 NeoBundle "itchyny/lightline.vim"
 "lightline.vim{{{
