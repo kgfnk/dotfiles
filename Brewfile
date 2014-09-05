@@ -75,5 +75,6 @@ cask install yorufukurou --force
 cask install virtualbox --force
 cask install vagrant --force
 cask install dash --force
+cask install atom
 #古いバージョンを削除
 cleanup
