@@ -323,12 +323,8 @@ nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 " カーソル位置の単語をgrep検索
 nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 " grep検索結果の再呼出
-<<<<<<< HEAD
 nnoremap <silent> [unite]gg :<C-u>UniteResume search-buffer<CR>
-=======
-nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
 nnoremap <silent> [unite]R  :<C-u>UniteResume<CR>
->>>>>>> b06ca9dfd56951372ef31493cd0ab91c8c5450e6
 " vim command 一覧
 noremap :<CR> :<C-u>Unite command mapping<CR>
 " 過去に使ったファイル一覧
