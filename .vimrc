@@ -319,11 +319,11 @@ let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
 " grep検索
-nnoremap <silent> [unite]gr  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 " カーソル位置の単語をgrep検索
 nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 " grep検索結果の再呼出
-nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+nnoremap <silent> [unite]gg :<C-u>UniteResume search-buffer<CR>
 " vim command 一覧
 noremap :<CR> :<C-u>Unite command mapping<CR>
 " 過去に使ったファイル一覧
