@@ -92,7 +92,6 @@ function chpwd() {
 }
 # [コマンドラインでcdとかしたら勝手にlsするシェルスクリプト | girigiribauer.com](http://girigiribauer.com/archives/724)
 
-#ターミナル上でMacVimを使う
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
-	alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-fi
+# python
+export WORKON_HOME=~/.virtualenvs
+. /usr/local/bin/virtualenvwrapper.sh

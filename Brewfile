@@ -39,7 +39,8 @@ install ctags
 install w3m
 install tree
 install sl
-install macvim
+install vim --with-lua --override-system-vi
+#install macvim
 install ricty
 # プログラム言語
 install rbenv

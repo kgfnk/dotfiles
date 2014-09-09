@@ -436,6 +436,10 @@ NeoBundle "vim-scripts/Better-Javascript-Indentation"
 NeoBundle "AtsushiM/sass-compile.vim"
 NeoBundle "cakebaker/scss-syntax.vim"
 
+"python
+NeoBundle "davidhalter/jedi-vim"
+NeoBundle "nathanaelkane/vim-indent-guides"
+let g:indent_guides_enable_on_vim_startup = 1
 " git
 " fugitive{{{
 NeoBundle "tpope/vim-fugitive"
@@ -631,6 +635,8 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
       \ "autoload": {
       \   "mappings": ['<Plug>TaskList'],
       \}}
+
+NeoBundle "kgfnk/csvconv"
 call neobundle#end()
 
 filetype plugin indent on
@@ -841,22 +847,7 @@ endif
 
 "エラーウインドウ
 nnoremap <silent> <Leader>] :<C-u>cn<CR>
-nnoremap <silent> <Leader>[ :<C-u>cp<CR>
-
-" ウインドウ分割時にウインドウサイズを変更
-nnoremap <silent> <S-Left>  :<C-u>5wincmd ><CR>
-nnoremap <silent> <S-Right> :<C-u>5wincmd <<CR>
-nnoremap <silent> <S-Up>    :<C-u>5wincmd -<CR>
-nnoremap <silent> <S-Down>  :<C-u>5wincmd +<CR>
-
-" ヤンクの時にクリップボードにもセットする
-set clipboard+=unnamed
-set clipboard+=autoselect
-
-" ステータスラインに文字コードと改行文字を表示
-"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-
-"set grepprg=findstr\ /nS
+set grepprg=findstr\ /nS
 "set grepprg=grep\ -nHrwi
 "set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
 set grepprg=ag\ -S
@@ -875,6 +866,7 @@ command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
 nmap U :<C-u>GundoToggle<CR>
 " TODOリスト表示
 nmap <Leader>T <plug>TaskList
+
 " }}}
 
 " オムニ補完 {{{
@@ -891,5 +883,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 syntax enable
 set background=dark
 colorscheme solarized
+
 " }}}
 " vim:set ft=vim foldmethod=marker:
