@@ -631,6 +631,8 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
       \ "autoload": {
       \   "mappings": ['<Plug>TaskList'],
       \}}
+
+NeoBundle "kgfnk/csvconv"
 call neobundle#end()
 
 filetype plugin indent on
@@ -773,12 +775,19 @@ endif
 "set guioptions+=a
 "横スクロール
 set guioptions+=b
+"スクロール開始位置を変更
+set scrolloff=10
 " }}}
 
 " キーマップ設定 {{{
+" コマンド
+nnoremap <Leader>: q:a
+nnoremap <Leader>/ q/a
+
 " ペースト
 inoremap <C-v> <ESC>"*pa
 cnoremap <C-v> <C-r>+
+vnoremap <C-p> I<C-r>"<ESC><ESC>
 
 " ヴィジュアルモードで置換
 vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
@@ -808,6 +817,7 @@ nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 
 " 日付入力
 inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
+inoremap <C-d><C-j> <c-r>=strftime("%Y月%m日%d(%a)")<CR>
 inoremap <C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
 inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
 
