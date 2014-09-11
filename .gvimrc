@@ -23,12 +23,12 @@ highlight SpecialKey guifg=dimgray
 highlight NonText guifg=dimgray
 
 " 半透明化
-if has('win32')
-	gui
-	autocmd GUIEnter * set transparency=255
-	autocmd FocusGained * set transparency=255
-	autocmd FocusLost * set transparency=210
-endif
+"if has('win32')
+"	gui
+"	autocmd GUIEnter * set transparency=255
+"	autocmd FocusGained * set transparency=255
+"	autocmd FocusLost * set transparency=210
+"endif
 
 "set guifont=Migu_2M:h11:b:cANSI
-"set guifont=Migu_2M:h11:b
+set guifont=Migu_2M:h11:b
