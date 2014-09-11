@@ -2,7 +2,7 @@
 set nocompatible
 set helplang=ja
 
-set rtp+=~/.vim/
+set rtp+=~/.vim/,~/.vim/after
 
 " エンコーディング {{{
 " Encoding
@@ -47,26 +47,35 @@ let format_allow_over_tw = 1	" ぶら下り可能幅
 NeoBundle "thinca/vim-quickrun"
 " vim-quickrun {{{
 let g:quickrun_config = {}
-let g:quickrun_config={
-\ "-": {
-\   "split": "vertical"
-\ },
-\ "markdown" : {
-\   "outputter" : "null",
-\   "command"   : "open",
-\   "cmdopt"    : "-a",
-\   "args"      : "Marked",
-\   "exec"      : "%c %o %a %s",
-\ },
-\ "html": {
-\   "command" : "open",
-\   "exec" : "%c %s",
-\   "outputter": "browser"
-\ },
-\}
+let g:quickrun_config._ = {
+	\   "split": "vertical",
+	\   "runner" : "vimproc"
+	\}
+let g:quickrun_config.html = {
+		\   "command" : "open",
+		\   "exec" : "%c %s",
+		\   "outputter": "browser"
+		\}
+
+if !has('win32')
+let g:quickrun_config.markdown = {
+		\   "outputter" : "null",
+		\   "command"   : "open",
+		\   "cmdopt"    : "-a",
+		\   "args"      : "Marked",
+		\   "exec"      : "%c %o %a %s"
+		\ }
+else
+	let g:quickrun_config.markdown = {
+		\   "outputter" : "browser"
+		\}
+endif
+
+"mac用
 " }}}
 NeoBundle "Markdown"
 NeoBundle "tpope/vim-markdown"
+NeoBundle "kannokanno/previm"
 NeoBundle "thinca/vim-ref"
 " vim-ref {{{
 autocmd FileType ruby,eruby nnoremap <silent> K :<C-u>Ref refe <cword><CR>
@@ -74,7 +83,9 @@ autocmd FileType ruby,eruby nnoremap <silent> K :<C-u>Ref refe <cword><CR>
 NeoBundle "vim-ruby/vim-ruby"
 NeoBundle "tpope/vim-rails"
 " 日付のインクリメント
+" vim-speeddating {{{
 NeoBundle "tpope/vim-speeddating"
+"}}}
 NeoBundle "tpope/vim-surround"
 " vim-surround {{{
 nmap <Leader>s ysiw		"文字で囲む
@@ -583,7 +594,8 @@ let g:switch_custom_definitions = [
 \   ['○', '×'],
 \   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
 \   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
-\   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+\   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
+\   ['日', '月', '火', '水', '木', '金', '土']
 \ ]
 let b:switch_custom_definitions = [
 \   {
@@ -636,7 +648,8 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
       \   "mappings": ['<Plug>TaskList'],
       \}}
 
-NeoBundle "kgfnk/csvconv"
+NeoBundle "kgfnk/vim-csvtrans"
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -821,10 +834,11 @@ nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 
 " 日付入力
 inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
-inoremap <C-d><C-j> <c-r>=strftime("%Y月%m日%d(%a)")<CR>
+inoremap <C-d><C-j> <c-r>=strftime("%Y年%m月%d日(%a)")<CR>
 inoremap <C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
 inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
 
+"
 " insertモードを抜ける
 inoremap <C-j> <esc>
  " 検索結果のハイライトを消す
@@ -878,6 +892,7 @@ nmap <Leader>T <plug>TaskList
 " }}}
 
 " オムニ補完 {{{
+set complete+=k
 autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
