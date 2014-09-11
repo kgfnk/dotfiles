@@ -170,7 +170,8 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions',
-    \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict'
+    \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict',
+    \ 'html' : $HOME.'/.vim/dict/html.dict'
         \ }
 
 " Define keyword.
