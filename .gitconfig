@@ -11,6 +11,6 @@
 [alias]
 	vimdiff = difftool
 [merge]
-	tool = vimdiff
+	tool = vimdiff3
 [push]
 	default = simple
