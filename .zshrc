@@ -92,6 +92,10 @@ function chpwd() {
 }
 # [コマンドラインでcdとかしたら勝手にlsするシェルスクリプト | girigiribauer.com](http://girigiribauer.com/archives/724)
 
+function agvim ( {
+  vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
+})
+
 # python
 export WORKON_HOME=~/.virtualenvs
 . /usr/local/bin/virtualenvwrapper.sh
