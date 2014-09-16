@@ -17,6 +17,7 @@ tap homebrew/binary
 # cask
 tap phinze/homebrew-cask
 tap caskroom/cask
+tap peco/peco
 #---
 # パッケージのインストール
 #---
@@ -42,6 +43,7 @@ install sl
 install vim --with-lua --override-system-vi
 #install macvim
 install ricty
+install peco
 # プログラム言語
 install rbenv
 install ruby-build
