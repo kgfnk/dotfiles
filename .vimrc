@@ -671,6 +671,8 @@ set ambiwidth=double
 " Beep音を消す(ヴィジュアルベルを無効)
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
+"クリップボード共有
+set clipboard=unnamed
 if has('mac')
 	"カーソルの形を変える(iTerm2用)
 	let &t_SI = "\e]50;CursorShape=1\x7"
