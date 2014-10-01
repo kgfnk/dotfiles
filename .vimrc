@@ -672,7 +672,8 @@ set ambiwidth=double
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 "クリップボード共有
-set clipboard=unnamed
+set clipboard=unnamed,autoselect
+
 if has('mac')
 	"カーソルの形を変える(iTerm2用)
 	let &t_SI = "\e]50;CursorShape=1\x7"
