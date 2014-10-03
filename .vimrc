@@ -2,7 +2,10 @@
 set nocompatible
 set helplang=ja
 
+" 環境変数 {{{
 set rtp+=~/.vim/,~/.vim/after
+let $TEMPLETE = $HOME.'/.vim/template'
+"}}}
 
 " エンコーディング {{{
 " Encoding
@@ -171,7 +174,8 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions',
     \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict',
-    \ 'html' : $HOME.'/.vim/dict/html.dict'
+    \ 'html' : $HOME.'/.vim/dict/html.dict',
+    \ 'javascript' : $HOME.'/.vim/dict/javascript.dict'
         \ }
 
 " Define keyword.
@@ -282,6 +286,10 @@ NeoBundleLazy 'Shougo/unite.vim' , {
 \ }
 " unite.vim {{{
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
 let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
 	" 入力モードで開始する
@@ -325,10 +333,6 @@ nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec:!<CR>
 "gista
 nnoremap <silent> [unite]g :<C-u>Unite<Space>gista<CR>
-
-" 大文字小文字を区別しない
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
 
 " grep検索
 nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
@@ -393,7 +397,7 @@ NeoBundle "Shougo/vimfiler.vim"
 " vimfiler {{{
 " :e . でVimFilerを開く
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_enable_auto_cd = 0
 "let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
 "}}}
 " DB接続
@@ -510,8 +514,11 @@ else
 endif
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_Open = 1
+let Tlist_Show_One_File = 1
+let Tlist_Use_Right_Window = 1
 let Tlist_Enable_Fold_Column = 1	"折りたたみ
 let Tlist_Auto_Update = 1		" 自動アップデート
+let Tlist_Exit_OnlyWindow = 1
 let g:xml_syntax_folding = 1
 nnoremap <silent> <F8> :TlistToggle<CR>
 "}}}
@@ -590,9 +597,11 @@ NeoBundle "AndrewRadev/switch.vim"
 nnoremap - :Switch<cr>
 let g:switch_custom_definitions = [
 \   ['on', 'off'],
+\   ['And', 'Or'],
 \   ['and', 'or'],
 \   ['start', 'end'],
 \   ['○', '×'],
+\   ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'],
 \   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
 \   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
 \   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
@@ -897,6 +906,7 @@ nmap <Leader>T <plug>TaskList
 
 " オムニ補完 {{{
 set complete+=k
+set completeopt=menuone
 autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -910,6 +920,5 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 syntax enable
 set background=dark
 colorscheme solarized
-
 " }}}
 " vim:set ft=vim foldmethod=marker:
