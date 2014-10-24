@@ -768,7 +768,7 @@ set autoindent
 set smartindent
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
-" 文字のないところにカーソル移動できるようにする
+" 矩形選択で文字のないところにカーソル移動できるようにする
 set virtualedit=block
 " }}}
 
@@ -845,21 +845,11 @@ nnoremap <Space>s :<C-u>source ~/.vimrc<CR> :<C-u>source ~/.gvimrc<CR>
 nnoremap <Space>. :<C-u>tabnew ~/.vimrc<CR>
 nnoremap <Space>, :<C-u>tabnew ~/.gvimrc<CR>
 
-" 日付入力
-inoremap <C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
-inoremap <C-d><C-j> <c-r>=strftime("%Y年%m月%d日(%a)")<CR>
-inoremap <C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
-inoremap <C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
-
-"
-" insertモードを抜ける
-inoremap <C-j> <esc>
  " 検索結果のハイライトを消す
 nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 
-" help
-au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
-au BufReadPost .vimrc map K :<C-u>exe ":help ".expand("<cword>")<CR>
+" insertモードを抜ける
+inoremap <C-j> <esc>
 
 " 入力補助
 inoremap `` ``<Left>
@@ -871,9 +861,21 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
 
+" 日付入力
+inoremap <Leader><C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
+inoremap <Leader><C-d><C-j> <c-r>=strftime("%Y年%m月%d日(%a)")<CR>
+inoremap <Leader><C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
+inoremap <Leader><C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
+
 " 連続インデント
 vnoremap < <gv
 vnoremap > >gv
+" ヴィジュアルモードで置換
+vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
+
+" help
+au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
+au BufReadPost .vimrc map K :<C-u>exe ":help ".expand("<cword>")<CR>
 
 if has('mac')
 	" ;と:を入れ替える。(英字キーボード用)
