@@ -819,8 +819,39 @@ inoremap <C-v> <ESC>"*pa
 cnoremap <C-v> <C-r>+
 vnoremap <C-p> I<C-r>"<ESC><ESC>
 
-" ヴィジュアルモードで置換
-vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
+" MACと同じ動きにする設定 {{{
+" 削除
+" カーソルから行の末尾までを消す
+inoremap <C-k> _<ESC>d$a
+" カーソルから行の末尾までを消す
+inoremap <C-y> <ESC>pi
+" カーソルから行頭まで削除
+" <C-u>にデフォルトでマッピング
+
+" カーソルの左側の文字を削除
+" <C-h>にデフォルトでマッピング
+" カーソル右側の文字を削除
+inoremap <C-d> <ESC>lxi
+
+" 左右の文字を入れ替える
+inoremap <C-t> <ESC>xpi
+" 空行の挿入
+inoremap <C-o> <CR>
+" 空行の挿入
+inoremap <C-m> <CR>
+" カーソルが中央になるようにスクロール
+inoremap <C-l> <ESC>zzi
+
+" 移動
+" カーソルを行頭へ
+inoremap <C-a> <ESC>0i
+" カーソルを行末へ
+inoremap <C-e> <ESC>A
+" カーソルを左へ
+inoremap <C-b> <Left>
+" カーソルを右へ
+inoremap <C-f> <Right>
+" }}}
 
 " バッファ切り替え
 nnoremap <C-Left> :<C-u>bp<CR>
