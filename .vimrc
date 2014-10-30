@@ -738,7 +738,17 @@ set showmatch
 "カーソルラインを表示
 set cursorline
 "カーソルカラムを表示（縦線）
-set cursorcolumn
+set nocursorcolumn
+" アンダーラインを引く(color terminal)
+autocmd VimEnter,ColorScheme * highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+autocmd VimEnter,ColorScheme * highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+autocmd InsertEnter * highlight CursorLine cterm=bold
+autocmd InsertEnter * highlight CursorLine gui=bold
+autocmd InsertLeave * highlight CursorLine cterm=underline
+autocmd InsertLeave * highlight CursorLine gui=underline
+
 " ルーラーを表示 (noruler:非表示)
 set ruler
 " タブや改行を表示 (list:表示)
@@ -746,6 +756,13 @@ set list
 " どの文字でタブや改行を表示するかを設定
 set listchars=tab:»-,trail:_
 "set listchars=tab:>-,extends:<,trail:-,eol:<
+" 全角スペースを可視化
+augroup highlightZenkakuSpace
+  autocmd!
+  autocmd VimEnter,ColorScheme * highlight ZenkakuSpace term=underline ctermbg=darkcyan guibg=#063642
+  autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+augroup END
+
 " 長い行を折り返して表示 (nowrap:折り返さない)
 set wrap
 " 常にステータス行を表示 (詳細は:he laststatus)
