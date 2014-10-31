@@ -655,7 +655,10 @@ let g:variable_style_switch_definitions = [
 nnoremap + :call switch#Switch(g:variable_style_switch_definitions)<cr>
 "}}}
 "ctrlp.vim{{{
-NeoBundle "kien/ctrlp.vim"
+"NeoBundle "kien/ctrlp.vim"
+"fork版
+NeoBundle "ctrlpvim/ctrlp.vim"
+let g:ctrlp_show_hidden = 1
 "}}}
 "NeoBundle "vim-scripts/YankRing.vim"
 " yankround {{{
