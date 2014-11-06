@@ -52,26 +52,29 @@ NeoBundle "thinca/vim-quickrun"
 let g:quickrun_config = {}
 let g:quickrun_config._ = {
 	\   "split": "vertical",
-	\   "runner" : "vimproc"
+	\   "runner" : "vimproc",
+	\   "runner/vimproc/updatetime" : 40,
 	\}
-let g:quickrun_config.html = {
+if has("win32")
+	let g:quickrun_config.html = {
+		\   "outputter" : "browser"
+		\}
+	let g:quickrun_config.markdown = {
+		\   "outputter" : "browser"
+		\}
+else
+	let g:quickrun_config.html = {
 		\   "command" : "open",
 		\   "exec" : "%c %s",
 		\   "outputter": "browser"
 		\}
-
-if !has("win32")
-let g:quickrun_config.markdown = {
+	let g:quickrun_config.markdown = {
 		\   "outputter" : "null",
 		\   "command"   : "open",
 		\   "cmdopt"    : "-a",
 		\   "args"      : "Marked",
 		\   "exec"      : "%c %o %a %s"
 		\ }
-else
-	let g:quickrun_config.markdown = {
-		\   "outputter" : "browser"
-		\}
 endif
 
 "mac用
@@ -424,6 +427,8 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 "}}}
 NeoBundle "vim-scripts/DirDiff.vim"
+" 単語単位のdiff(press key F7)
+NeoBundle 'vim-scripts/diffchar.vim'
 "lightline.vim{{{
 NeoBundle "itchyny/lightline.vim"
 let g:lightline = {
