@@ -416,7 +416,6 @@ let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 " }}}
-NeoBundle "vim-scripts/aspvbs.vim"
 " ログファイルに色を付ける
 NeoBundle 'vim-scripts/AnsiEsc.vim'
 NeoBundle "rking/ag.vim"
@@ -426,9 +425,11 @@ NeoBundle "scrooloose/syntastic"
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 "}}}
+" diff {{{
 NeoBundle "vim-scripts/DirDiff.vim"
 " 単語単位のdiff(press key F7)
 NeoBundle 'vim-scripts/diffchar.vim'
+" }}}
 "lightline.vim{{{
 NeoBundle "itchyny/lightline.vim"
 let g:lightline = {
@@ -454,6 +455,10 @@ NeoBundle 'chriskempson/vim-tomorrow-theme'
 " html5
 "NeoBundle "othree/html5.vim"
 "NeoBundle "taichouchou2/html5.vim"
+" }}}
+
+"vbs {{{
+NeoBundle "vim-scripts/aspvbs.vim"
 " }}}
 
 " javascript {{{
