@@ -1,0 +1,56 @@
+"3.8.2 (created: 2014/02/13 23:52:43)
+
+nnoremap j 5j
+nnoremap k 5k
+nnoremap <c-n> gt
+nnoremap <c-p> gT
+cmap <c-n> <UP>
+cmap <c-p> <Down>
+
+noremap s :tabopen<Space>google<Space>
+
+"タイトルもコピー
+map ya :<C-u>copy anchor<CR>
+map ym :<C-u>copy markdown<CR>
+
+map <c-s> :source ~/_vimperatorrc<CR>
+
+" 検索で大文字小文字を無視
+set ignorecase
+
+" 入力欄に自動フォーカスしない
+set focuscontent
+" ビジュアルベルを表示しない
+set visualbell
+highlight Bell display:none
+
+" ヒントモードを英字に変更
+set hintchars=ifjklasdhguonmerwc
+
+" :oなどでの補完候補をサーチエンジン、履歴に限定
+set complete=slS
+
+" commandモードでIMEオフ
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+"はてな拡張
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+" ヒントを変更
+"hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+"hi HintElem color: gray; background-color: #a1e4e6;
+"hi HintActive color: black; background-color: #ff8700;
+
+" デフォルトのエラーの色を変更
+hi ErrorMsg color:white; background-color: #ec6aa1;
+
+" copy.js
+javascript <<EOM
+  liberator.globalVariables.copy_templates = [
+    { label: 'title', value: '%TITLE%' },
+    { label: 'plain', value: '%TITLE% %URL%' },
+    { label: 'anchor', value: '<a href="%URL%">%TITLE%</a>' },
+    { label: 'markdown', value: '* [%TITLE%](%URL%)' },
+  ];
+EOM
+
+" vim: set ft=vimperator:
