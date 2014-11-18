@@ -2,12 +2,18 @@
 
 nnoremap j 5j
 nnoremap k 5k
+
 nnoremap <c-n> gt
 nnoremap <c-p> gT
-cmap <c-n> <UP>
-cmap <c-p> <Down>
+nnoremap <c-l> gt
+nnoremap <c-h> gT
+nnoremap H :back<CR>
+nnoremap L :forward<CR>
+
+nmap <S-v> cv
 
 noremap s :tabopen<Space>google<Space>
+noremap U :undo<Space>
 
 "タイトルもコピー
 map ya :<C-u>copy anchor<CR>
@@ -15,6 +21,8 @@ map ym :<C-u>copy markdown<CR>
 
 map <c-s> :source ~/_vimperatorrc<CR>
 
+" 検索語を強調表示
+set hlsearch
 " 検索で大文字小文字を無視
 set ignorecase
 
@@ -34,7 +42,7 @@ set complete=slS
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
 
 "はてな拡張
-javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+"javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 " ヒントを変更
 "hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
 "hi HintElem color: gray; background-color: #a1e4e6;
@@ -53,4 +61,4 @@ javascript <<EOM
   ];
 EOM
 
-" vim: set ft=vimperator:
+" vim: set filetype=vim :

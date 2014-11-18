@@ -693,7 +693,10 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
       \   "mappings": ['<Plug>TaskList'],
       \}}
 " }}}
-"
+" キーマップ
+NeoBundle "tpope/vim-unimpaired"
+
+" CSV変換
 NeoBundle "kgfnk/vim-csvtrans"
 
 call neobundle#end()
@@ -911,8 +914,8 @@ inoremap <C-f> <Right>
 " }}}
 
 " バッファ切り替え
-nnoremap <C-Left> :<C-u>bp<CR>
-nnoremap <C-Right> :<C-u>bn<CR>
+nnoremap H :<C-u>bp<CR>
+nnoremap L :<C-u>bn<CR>
 nnoremap <C-Down> :<C-u>buffers<CR>
 
 nnoremap <Leader>f :<C-u>VimFilerBufferDir<CR>
@@ -960,6 +963,8 @@ vnoremap < <gv
 vnoremap > >gv
 " ヴィジュアルモードで置換
 vnoremap <C-r> "vy:%s/<C-r>v/<C-r>v/gc<Left><Left><Left>
+" ヴィジュアルモードで*検索
+vnoremap * "zy:let @/ = @z<CR>n
 
 " help
 au BufReadPost *.vim  map K :<C-u>exe ":help ".expand("<cword>")<CR>
@@ -972,7 +977,7 @@ endif
 
 "エラーウインドウ
 nnoremap <silent> <Leader>] :<C-u>cn<CR>
-set grepprg=findstr\ /nS
+"set grepprg=findstr\ /nS
 "set grepprg=grep\ -nHrwi
 "set grepprg=grep\ -nHrwi\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude-dir=*_doc\ --exclude=*.bak
 set grepprg=ag\ -S
