@@ -46,6 +46,7 @@ export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
+export DOCKER_HOST=tcp://127.0.0.1:2375
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
