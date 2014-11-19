@@ -72,7 +72,6 @@ cask install alfred --force
 # alfredから検索可能にする
 cask alfred link --force
 cask install xtrafinder --force
-cask install shiftit --force
 cask install xquartz --force
 cask install yorufukurou --force
 cask install virtualbox --force
