@@ -31,4 +31,4 @@ highlight NonText guifg=dimgray
 "endif
 
 "set guifont=Migu_2M:h11:b:cANSI
-set guifont=Migu_2M:h11:b
+set guifont=Menlo\ Regular:h14
