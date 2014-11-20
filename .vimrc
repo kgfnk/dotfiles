@@ -450,6 +450,7 @@ let g:lightline = {
 NeoBundle "altercation/vim-colors-solarized"
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle "jnurmine/Zenburn"
 " }}}
 " Syntax {{{
 " html5
@@ -926,8 +927,8 @@ nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
 "
 " タブ
 " タブ切り替え
-nnoremap <C-l> gt
-nnoremap <C-h> gT
+nnoremap <silent> <C-l> gt
+nnoremap <silent> <C-h> gT
 nnoremap <Space>t :<C-u>tabnew<CR>
 nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
 
