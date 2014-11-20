@@ -44,7 +44,7 @@ style! -name=commandline-ime chrome://* #liberator-commandline-command input {im
 "はてな拡張
 "javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 " ヒントを変更
-"hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
 "hi HintElem color: gray; background-color: #a1e4e6;
 "hi HintActive color: black; background-color: #ff8700;
 
