@@ -146,6 +146,7 @@ endfunction
 nnoremap <silent> vs :tabnew<CR>:VimShell<CR>
 nnoremap <silent> vp :VimShellPop<CR>
 "}}}
+
 " neocomplete {{{
 NeoBundle "Shougo/neocomplete.vim"
 "Note: This option must set it in .vimrc(.vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -254,6 +255,7 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " }}}
+
 " neosnippet {{{
 NeoBundle "Shougo/neosnippet"
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -480,10 +482,10 @@ NeoBundle "tpope/vim-rails"
 "
 "python {{{
 NeoBundle "davidhalter/jedi-vim"
-" vim-indent-guides {{{
-" NeoBundle "nathanaelkane/vim-indent-guides"
-" let g:indent_guides_enable_on_vim_startup = 1
-" }}}
+"vim-indent-guides {{{
+NeoBundle "nathanaelkane/vim-indent-guides"
+let g:indent_guides_enable_on_vim_startup = 1
+"}}}
 " }}}
 
 " git {{{
@@ -687,6 +689,8 @@ nmap <expr><C-p> yankround#is_active() ? "\<Plug>(yankround-prev)" : "<SID>(ctrl
 " }}}
 "
 NeoBundle "sjl/gundo.vim"
+
+NeoBundle "kristijanhusak/vim-multiple-cursors"
 
 " TaskList {{{
 NeoBundleLazy "vim-scripts/TaskList.vim", {
