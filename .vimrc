@@ -284,7 +284,7 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippe
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['html'] = 'html,javascript,jquery,css'
 let g:neosnippet#scope_aliases['javascript'] = 'javascript,jquery'
-let g:neosnippet#scope_aliases['aspvbs'] = 'html,javascript,jquery,css'
+let g:neosnippet#scope_aliases['aspvbs'] = 'html,javascript,jquery,css,aspvbs'
 "}}}
 " unite.vim {{{
 NeoBundleLazy 'Shougo/unite.vim' , {
