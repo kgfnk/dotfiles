@@ -771,6 +771,7 @@ set whichwrap=b,s,h,l,<,>,[,],~
 
 " インサートモードから抜ける時にnopasteに変更
 " set paste
+
 autocmd InsertLeave * set nopaste
 " }}}
 
