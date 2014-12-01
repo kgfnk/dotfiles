@@ -38,7 +38,6 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "" history-beginning-search-backward-end
 bindkey "" history-beginning-search-forward-end
 
-
 export PATH=/usr/local/bin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
@@ -54,6 +53,7 @@ autoload -U compinit
 compinit -u
 fpath=(/usr/local/Library/Contributions/brew_bash_completion.sh $fpath)
 eval "$(rbenv init -)"
+eval "$(hub alias -s)"
 
 # 名前で色を付けるようにする
 autoload colors
