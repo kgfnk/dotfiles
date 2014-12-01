@@ -12,14 +12,17 @@ nnoremap L :forward<CR>
 
 nmap <S-v> cv
 
+"mac用
+nnoremap ; :
+
 noremap s :tabopen<Space>google<Space>
 noremap U :undo<Space>
 
 "タイトルもコピー
-map ya :<C-u>copy anchor<CR>
-map ym :<C-u>copy markdown<CR>
+noremap ya :<C-u>copy anchor<CR>
+noremap ym :<C-u>copy markdown<CR>
 
-map <c-s> :source ~/_vimperatorrc<CR>
+noremap <c-s> :source ~/.vimperatorrc<CR>
 
 " 検索語を強調表示
 set hlsearch
@@ -44,7 +47,7 @@ style! -name=commandline-ime chrome://* #liberator-commandline-command input {im
 "はてな拡張
 "javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 " ヒントを変更
-"hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+hi Hint font-family: Arial; font-size: 16px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
 "hi HintElem color: gray; background-color: #a1e4e6;
 "hi HintActive color: black; background-color: #ff8700;
 
@@ -60,5 +63,7 @@ javascript <<EOM
     { label: 'markdown', value: '* [%TITLE%](%URL%)' },
   ];
 EOM
+
+set editor='/usr/local/bin/gvim -f'
 
 " vim: set filetype=vim :
