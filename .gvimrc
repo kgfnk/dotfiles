@@ -30,5 +30,8 @@ highlight NonText guifg=dimgray
 "	autocmd FocusLost * set transparency=210
 "endif
 
-"set guifont=Migu_2M:h11:b:cANSI
-set guifont=Menlo\ Regular:h14
+if has('win32')
+	set guifont=Migu_2M:h11:b:cANSI
+else
+	set guifont=Menlo\ Regular:h14
+endif

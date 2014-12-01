@@ -284,7 +284,7 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippe
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['html'] = 'html,javascript,jquery,css'
 let g:neosnippet#scope_aliases['javascript'] = 'javascript,jquery'
-let g:neosnippet#scope_aliases['aspvbs'] = 'html,javascript,jquery,css'
+let g:neosnippet#scope_aliases['aspvbs'] = 'html,javascript,jquery,css,aspvbs'
 "}}}
 " unite.vim {{{
 NeoBundleLazy 'Shougo/unite.vim' , {
@@ -452,6 +452,7 @@ let g:lightline = {
 NeoBundle "altercation/vim-colors-solarized"
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle "jnurmine/Zenburn"
 " }}}
 " Syntax {{{
 " html5
@@ -770,6 +771,7 @@ set whichwrap=b,s,h,l,<,>,[,],~
 
 " インサートモードから抜ける時にnopasteに変更
 " set paste
+
 autocmd InsertLeave * set nopaste
 " }}}
 
@@ -930,8 +932,8 @@ nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
 "
 " タブ
 " タブ切り替え
-nnoremap <C-l> gt
-nnoremap <C-h> gT
+nnoremap <silent> <C-l> gt
+nnoremap <silent> <C-h> gT
 nnoremap <Space>t :<C-u>tabnew<CR>
 nnoremap <Space>T :<C-u>tabnew<CR>:e .<CR>
 
