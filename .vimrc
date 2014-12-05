@@ -298,12 +298,12 @@ let g:unite_enable_smart_case = 1
 let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
 	" 入力モードで開始する
-	let g:unite_enable_start_insert=1
+	let g:unite_enable_start_insert=0
 	let g:unite_enable_split_vertically = 1 "縦分割で開く
 	let g:unite_winwidth = 45 "ウインドウの横幅設定
-	if has("win32")
-		let g:unite_source_find_command="find.exe"
-	endif
+	" if has("win32")
+	" 	let g:unite_source_find_command="find.exe"
+	" endif
 endfunction
 
 " ESCキーを2回押すとバッファを終了する
@@ -315,7 +315,7 @@ nnoremap [unite] <Nop>
 nmap <Space> [unite]
 nnoremap <silent> [unite]e :<C-u>Unite<Space>file<CR>
 "カレントディレクトリを表示
-nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 "バッファと最近開いたファイル一覧を表示
 nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
 "最近開いたディレクトリを表示
@@ -335,14 +335,14 @@ nnoremap <silent> [unite]m :<C-u>Unite<Space>bookmark<CR>
 "outline
 nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 "file_rec:!
-nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec:!<CR>
+nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec/async:!<CR>
 "gista
 nnoremap <silent> [unite]g :<C-u>Unite<Space>gista<CR>
 
 " grep検索
-nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit -auto-preview<CR>
 " カーソル位置の単語をgrep検索
-nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
+nnoremap <silent> [unite]gR :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit -auto-preview<CR><C-R><C-W><CR>
 " grep検索結果の再呼出
 nnoremap <silent> [unite]gg :<C-u>UniteResume search-buffer<CR>
 nnoremap <silent> [unite]R  :<C-u>UniteResume<CR>
@@ -355,15 +355,11 @@ nnoremap <expr>tg  ':Unite tag -buffer-name=tags -input='.expand("<cword>").'<CR
 " unite grep に ag(The Silver Searcher) を使う
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_recursive_opt = '-S'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --line-numbers'
+  " Using ag as recursive command.
+  let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 endif
-"if executable('pt')
-"  let g:unite_source_grep_command = 'pt'
-"  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-"  let g:unite_source_grep_recursive_opt = ''
-"  let g:unite_source_grep_encoding = 'utf-8'
-"endif
 "}}}
 NeoBundle "Shougo/neomru.vim"
 NeoBundle "ujihisa/unite-colorscheme"
@@ -392,10 +388,6 @@ function! s:TagsUpdate()
         execute "setlocal tags+=".neocomplcache#cache#encode_name('tags_output', filename)
     endfor
 endfunction
-autocmd BufEnter *
-\   if empty(&buftype)
-\|      nnoremap <buffer> g<C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
-\|  endif
 "}}}
 NeoBundle "hallettj/jslint.vim"
 " vimfiler {{{
@@ -989,10 +981,13 @@ nnoremap <silent> <Leader>] :<C-u>cn<CR>
 set grepprg=ag\ -S
 "set grepprg=pt\ /S
 " grep検索実行後にQuickFix Listを表示する
-autocmd QuickFixCmdPost *grep* cwindow
-nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
+"autocmd QuickFixCmdPost *grep* cwindow
+"nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
 "nnoremap gr :vim <cword> % \| cw<CR>
-nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
+"nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
+
+" grep検索
+nnoremap <silent> gr :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit<CR><C-R><C-W><CR>
 
 "" TODOファイル
 command! Todo edit ~/Dropbox/Memo/todo.txt
