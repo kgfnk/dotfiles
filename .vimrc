@@ -696,6 +696,12 @@ NeoBundle "tpope/vim-unimpaired"
 " CSV変換
 NeoBundle "kgfnk/vim-csvtrans"
 
+" {{{ restart.vim
+NeoBundle "tyru/restart.vim"
+let g:restart_sessionoptions
+    \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+" }}}
+
 call neobundle#end()
 
 filetype plugin indent on
