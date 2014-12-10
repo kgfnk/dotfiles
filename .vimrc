@@ -886,21 +886,21 @@ vnoremap <C-p> I<C-r>"<ESC><ESC>
 " MACと同じ動きにする設定 {{{
 " 削除
 " カーソルから行の末尾までを消す
-inoremap <C-k> _<ESC>d$a
-" カーソルから行の末尾までを消す
-inoremap <C-y> <ESC>pi
+inoremap <silent> <C-k> _<ESC>d$a
 " カーソルから行頭まで削除
 " <C-u>にデフォルトでマッピング
 
 " カーソルの左側の文字を削除
 " <C-h>にデフォルトでマッピング
 " カーソル右側の文字を削除
-inoremap <C-d> <ESC>lxi
+inoremap <C-d> <Del>
 
 " 左右の文字を入れ替える
 inoremap <C-t> <ESC>xpi
 " 空行の挿入
 inoremap <C-o> <CR>
+" 前の行に空行を挿入
+inoremap <C-O> <ESC>O
 " 空行の挿入
 inoremap <C-m> <CR>
 " カーソルが中央になるようにスクロール
