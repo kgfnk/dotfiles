@@ -81,7 +81,11 @@ endif
 " }}}
 NeoBundle "Markdown"
 NeoBundle "tpope/vim-markdown"
+" previm {{{
 NeoBundle "kannokanno/previm"
+let g:previm_open_cmd = ''
+let g:previm_enable_realtime = 1
+" }}}
 " vim-ref {{{
 NeoBundle "thinca/vim-ref"
 autocmd FileType ruby,eruby nnoremap <silent> K :<C-u>Ref refe <cword><CR>
