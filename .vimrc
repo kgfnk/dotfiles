@@ -987,7 +987,7 @@ nnoremap <silent> <Leader>] :<C-u>cn<CR>
 set grepprg=ag\ -S
 "set grepprg=pt\ /S
 " grep検索実行後にQuickFix Listを表示する
-"autocmd QuickFixCmdPost *grep* cwindow
+autocmd QuickFixCmdPost *grep* cwindow
 "nnoremap gr :<C-u>grep "<C-R><C-W>" .<CR>
 "nnoremap gr :vim <cword> % \| cw<CR>
 "nnoremap gR :<C-u>grep -R "<C-R><C-W>" *<CR>
