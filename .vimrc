@@ -264,18 +264,20 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 NeoBundle "Shougo/neosnippet"
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Plugin key-mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><C-k> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\_<ESC>d$a"
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 "inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "\ "\<Plug>(neosnippet_expand_or_jump)"
 "\: pumvisible() ? "\<C-n>" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)"
-"\: "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 " For snippet_complete marker.
 if has("conceal")
@@ -890,7 +892,7 @@ vnoremap <C-p> I<C-r>"<ESC><ESC>
 " MACと同じ動きにする設定 {{{
 " 削除
 " カーソルから行の末尾までを消す
-inoremap <silent> <C-k> _<ESC>d$a
+"inoremap <silent> <C-k> _<ESC>d$a
 " カーソルから行頭まで削除
 " <C-u>にデフォルトでマッピング
 
