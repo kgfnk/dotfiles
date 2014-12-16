@@ -756,7 +756,8 @@ if has("mac")
 	set imdisable
 else
 " インサートモードから抜けると自動的にIMEをオフにする(windows用)
-	set iminsert=2
+	set iminsert=0
+	set imsearch=-1
 endif
 " }}}
 "
