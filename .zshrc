@@ -43,6 +43,7 @@ export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library
 
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
 export DOCKER_HOST=tcp://127.0.0.1:2375
