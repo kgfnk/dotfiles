@@ -963,12 +963,6 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
 
-" 日付入力
-inoremap <Leader><C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
-inoremap <Leader><C-d><C-j> <c-r>=strftime("%Y年%m月%d日(%a)")<CR>
-inoremap <Leader><C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
-inoremap <Leader><C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
-
 " 連続インデント
 vnoremap < <gv
 vnoremap > >gv
