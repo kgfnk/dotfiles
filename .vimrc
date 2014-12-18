@@ -344,6 +344,8 @@ nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec/async:!<CR>
 "gista
 nnoremap <silent> [unite]g :<C-u>Unite<Space>gista<CR>
+" VimFilerExplorer
+nnoremap <silent> <Space>v :<C-u>VimFilerExplorer<CR>
 
 " grep検索
 nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit -auto-preview<CR>
