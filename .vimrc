@@ -204,6 +204,7 @@ let g:neocomplete#delimiter_patterns.vim = ['#']
 let g:neocomplete#delimiter_patterns.cpp = ['::']
 let g:neocomplete#delimiter_patterns.aspvbs = ['.']
 
+
 " 使用する補完の種類を減らす
 " 現在のSourceの取得は `:echo keys(neocomplete#variables#get_sources())`
 " デフォルト: ['file', 'tag', 'neosnippet', 'vim', 'dictionary', 'omni', 'member', 'syntax', 'include', 'buffer', 'file/include']
@@ -606,10 +607,22 @@ let g:alpaca_tags#config = {
        \ }
 "}}}
 " rsense {{{
-"NeoBundle "Shougo/neocomplcache-rsense.vim"
-"let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
-"let g:rsenseUseOmniFunc = 1
-" }}}
+NeoBundleLazy 'marcus/rsense', {
+\ 'autoload': {
+\   'filetypes': 'ruby',
+\ },
+\ }
+NeoBundle 'supermomonga/neocomplete-rsense.vim', {
+\ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
+\ }
+let g:rsenseUseOmniFunc = 1
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby =
+  \'[^. *\t]\.\w*\|\h\w*::'
+"}}}
 
 "Aplign{{{
 NeoBundle "vim-scripts/Align"
