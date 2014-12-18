@@ -182,6 +182,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions',
     \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict',
+    \ 'vb' : $HOME.'/.vim/dict/aspvbs.dict',
     \ 'html' : $HOME.'/.vim/dict/html.dict',
     \ 'javascript' : $HOME.'/.vim/dict/javascript.dict'
         \ }
