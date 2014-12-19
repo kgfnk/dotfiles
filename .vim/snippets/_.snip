@@ -1,3 +1,12 @@
-snippet     date
+snippet     date_d
 options     word
     `strftime("%Y/%m/%d")`
+snippet     date_t
+options     word
+	`strftime("%H:%M:%S")`
+snippet     date_dt
+options     word
+	`strftime("%Y/%m/%d %H:%M:%S")`
+snippet     date_jp
+options     word
+    `strftime("%Y年%m月%d日(%a)")`

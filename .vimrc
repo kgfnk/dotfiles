@@ -2,6 +2,11 @@
 set nocompatible
 set helplang=ja
 
+" macでmetaキーを有効にする(optionキー)
+if has("mac")
+	set macmeta
+endif
+
 " 環境変数 {{{
 set rtp+=~/.vim/,~/.vim/after
 let $TEMPLETE = $HOME.'/.vim/template'
@@ -182,6 +187,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions',
     \ 'aspvbs' : $HOME.'/.vim/dict/aspvbs.dict',
+    \ 'vb' : $HOME.'/.vim/dict/aspvbs.dict',
     \ 'html' : $HOME.'/.vim/dict/html.dict',
     \ 'javascript' : $HOME.'/.vim/dict/javascript.dict'
         \ }
@@ -345,6 +351,8 @@ nnoremap <silent> [unite]o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> [unite]<CR> :<C-u>Unite<Space>file_rec/async:!<CR>
 "gista
 nnoremap <silent> [unite]g :<C-u>Unite<Space>gista<CR>
+" VimFilerExplorer
+nnoremap <silent> <Space>v :<C-u>VimFilerExplorer<CR>
 
 " grep検索
 nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit -auto-preview<CR>
@@ -975,12 +983,6 @@ inoremap [] []<Left>
 inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap %% %%<Left>
-
-" 日付入力
-inoremap <Leader><C-d><C-d> <c-r>=strftime("%Y/%m/%d")<CR>
-inoremap <Leader><C-d><C-j> <c-r>=strftime("%Y年%m月%d日(%a)")<CR>
-inoremap <Leader><C-d><C-t> <C-R>=strftime("%H:%M:%S")<CR>
-inoremap <Leader><C-d><C-n> <C-R>=strftime("%Y/%m/%d %H:%M:%S")<CR>
 
 " 連続インデント
 vnoremap < <gv
