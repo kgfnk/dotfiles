@@ -3,9 +3,9 @@ set nocompatible
 set helplang=ja
 
 " macでmetaキーを有効にする(optionキー)
-if has("mac")
-	set macmeta
-endif
+" if has("mac")
+" 	set macmeta
+" endif
 
 " 環境変数 {{{
 set rtp+=~/.vim/,~/.vim/after
@@ -810,6 +810,8 @@ set wildmode=full
 set formatoptions+=mM
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
+" 対応する括弧に移動する時間0.1秒
+set matchtime=1
 "カーソルラインを表示
 set cursorline
 "カーソルカラムを表示（縦線）
@@ -840,6 +842,8 @@ augroup END
 
 " 長い行を折り返して表示 (nowrap:折り返さない)
 set wrap
+" 長い行も表示する
+set display=lastline
 " 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus=2
 " コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
@@ -851,6 +855,8 @@ set title
 " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
 set splitbelow
 set splitright
+" 補完メニューの最大件数
+set pumheight=10
 " }}}
 
 " インデント {{{
@@ -905,6 +911,9 @@ set scrolloff=10
 " コマンド
 nnoremap <Leader>: q:a
 nnoremap <Leader>/ q/a
+
+" コピー
+noremap Y y$
 
 " ペースト
 inoremap <C-v> <ESC>"*pa
