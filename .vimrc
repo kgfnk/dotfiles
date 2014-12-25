@@ -9,6 +9,7 @@ set helplang=ja
 
 " 環境変数 {{{
 set rtp+=~/.vim/,~/.vim/after
+set path+=**
 let $TEMPLETE = $HOME.'/.vim/template'
 "}}}
 
@@ -727,6 +728,15 @@ NeoBundle "kgfnk/vim-csvtrans"
 NeoBundle "tyru/restart.vim"
 let g:restart_sessionoptions
     \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+" }}}
+
+" vim-signify {{{
+NeoBundle "mhinz/vim-signify"
+let g:signify_disable_by_default = 1
+" 次の差分箇所に移動
+nmap <Leader>gj <Plug>(signify-next-hunk)zz
+" 前の差分箇所に移動
+nmap <Leader>gk <Plug>(signify-prev-hunk)zz
 " }}}
 
 call neobundle#end()
