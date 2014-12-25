@@ -3,9 +3,9 @@ set nocompatible
 set helplang=ja
 
 " macでmetaキーを有効にする(optionキー)
-if has("mac")
-	set macmeta
-endif
+" if has("mac")
+" 	set macmeta
+" endif
 
 " 環境変数 {{{
 set rtp+=~/.vim/,~/.vim/after
