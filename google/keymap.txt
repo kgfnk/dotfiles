@@ -39,12 +39,12 @@ Composition	F7	ConvertToFullKatakana
 Composition	F8	ConvertToHalfWidth
 Composition	F9	ConvertToFullAlphanumeric
 Composition	Hankaku/Zenkaku	IMEOff
-Composition	Henkan	ConvertToHalfAlphanumeric
+Composition	Henkan	PredictAndConvert
 Composition	Hiragana	ConvertToHiragana
 Composition	Home	MoveCursorToBeginning
 Composition	Katakana	ConvertToFullKatakana
 Composition	Left	MoveCursorLeft
-Composition	Muhenkan	IMEOff
+Composition	Muhenkan	ConvertToHalfAlphanumeric
 Composition	Right	MoveCursorRight
 Composition	Shift Backspace	Backspace
 Composition	Shift ESC	Cancel
@@ -93,12 +93,12 @@ Conversion	F7	ConvertToFullKatakana
 Conversion	F8	ConvertToHalfWidth
 Conversion	F9	ConvertToFullAlphanumeric
 Conversion	Hankaku/Zenkaku	IMEOff
-Conversion	Henkan	ConvertToHalfAlphanumeric
+Conversion	Henkan	PredictAndConvert
 Conversion	Hiragana	ConvertToHiragana
 Conversion	Home	SegmentFocusFirst
 Conversion	Katakana	ConvertToFullKatakana
 Conversion	Left	SegmentFocusLeft
-Conversion	Muhenkan	SwitchKanaType
+Conversion	Muhenkan	ConvertToHalfAlphanumeric
 Conversion	PageDown	ConvertNextPage
 Conversion	PageUp	ConvertPrevPage
 Conversion	Right	SegmentFocusRight
@@ -137,6 +137,7 @@ Prediction	Ctrl Delete	DeleteSelectedCandidate
 Suggestion	Down	PredictAndConvert
 Suggestion	Shift Enter	CommitFirstSuggestion
 DirectInput	Muhenkan	IMEOff
+Precomposition	Escape	CancelAndIMEOff
 Composition	ASCII	InsertCharacter
 Composition	Kanji	IMEOff
 Composition	OFF	IMEOff
