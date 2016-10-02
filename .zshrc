@@ -39,7 +39,9 @@ bindkey "" history-beginning-search-backward-end
 bindkey "" history-beginning-search-forward-end
 
 export PATH=/usr/local/bin:$PATH
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+#export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:${PATH}
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
@@ -63,6 +65,9 @@ colors
 # LS_COLORSを設定しておく
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
+# ターミナルを256色へ変更
+export TERM='xterm-256color'
+
 # ファイル補完候補に色を付ける
  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -73,9 +78,8 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 
 #alias
 alias ls="ls --color=auto"
-alias la="ls -a"
-alias ll="ls -l"
-alias lla="ls -la"
+alias l="ls -lAFh"
+alias la="ls -la"
 alias alt="ls -alt"
 #delはゴミ箱へ移動
 alias del='mydel'
@@ -94,13 +98,18 @@ function chpwd() {
 }
 # [コマンドラインでcdとかしたら勝手にlsするシェルスクリプト | girigiribauer.com](http://girigiribauer.com/archives/724)
 
-function agvim ( {
-  vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
-})
+#function agvim ( {
+#  vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
+#})
 
 # python
-export WORKON_HOME=~/.virtualenvs
-. /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=~/.virtualenvs
+#. /usr/local/bin/virtualenvwrapper.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### nvim
+export XDG_CONFIG_HOME="$HOME/.config"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
