@@ -40,6 +40,8 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'vim-jp/vimdoc-ja'
+
 if !has("win32")
 	" w3m.vim {{{
 	NeoBundle "yuratomo/w3m.vim"
@@ -405,7 +407,7 @@ function! s:TagsUpdate()
     endfor
 endfunction
 "}}}
-NeoBundle "hallettj/jslint.vim"
+"NeoBundle "hallettj/jslint.vim"
 " vimfiler {{{
 NeoBundle "Shougo/vimfiler.vim"
 " :e . でVimFilerを開く
@@ -478,8 +480,8 @@ NeoBundle "vim-scripts/Better-Javascript-Indentation"
 " }}}
 
 " sass {{{
-NeoBundle "AtsushiM/sass-compile.vim"
-NeoBundle "cakebaker/scss-syntax.vim"
+"NeoBundle "AtsushiM/sass-compile.vim"
+"NeoBundle "cakebaker/scss-syntax.vim"
 " }}}
 
 " ruby {{{
@@ -549,7 +551,7 @@ NeoBundle "vim-scripts/taglist.vim"
 if has("win32")
 	let Tlist_Ctags_Cmd = 'C:\bin\ctags.exe'
 else
-	let TList_Ctags_Cmd = "/usr/local/bin/ctags"
+	let TList_Ctags_Cmd = "/usr/bin/ctags"
 endif
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_Open = 1
@@ -738,6 +740,8 @@ nmap <Leader>gj <Plug>(signify-next-hunk)zz
 " 前の差分箇所に移動
 nmap <Leader>gk <Plug>(signify-prev-hunk)zz
 " }}}
+
+NeoBundle "rizzatti/dash.vim"
 
 call neobundle#end()
 
