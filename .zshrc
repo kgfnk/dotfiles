@@ -49,13 +49,13 @@ export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library
 
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
 export DOCKER_HOST=tcp://127.0.0.1:2375
-
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -U compinit
 compinit -u
 fpath=(/usr/local/Library/Contributions/brew_bash_completion.sh $fpath)
-eval "$(rbenv init -)"
 eval "$(hub alias -s)"
 
 # 名前で色を付けるようにする
