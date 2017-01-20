@@ -85,6 +85,7 @@ alias alt="ls -alt"
 alias del='mydel'
 function mydel() { mv $1 ~/.Trash }
 alias df='df -h'
+alias gs='git status'
 #alias find=gfind
 
 # 移動したらすぐls -lah
