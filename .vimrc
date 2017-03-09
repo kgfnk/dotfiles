@@ -766,6 +766,9 @@ autocmd GUIEnter * set visualbell t_vb=
 "クリップボード共有
 set clipboard=unnamed,autoselect
 
+"バックスペースで改行削除
+set backspace=2
+
 if has("mac")
 	"カーソルの形を変える(iTerm2用)
 	let &t_SI = "\e]50;CursorShape=1\x7"
@@ -998,14 +1001,14 @@ nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 inoremap <C-j> <esc>
 
 " 入力補助
-inoremap `` ``<Left>
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap %% %%<Left>
+"inoremap `` ``<Left>
+"inoremap <> <><Left>
+"inoremap () ()<Left>
+"inoremap {} {}<Left>
+"inoremap [] []<Left>
+"inoremap "" ""<Left>
+"inoremap '' ''<Left>
+"inoremap %% %%<Left>
 
 " 連続インデント
 vnoremap < <gv
