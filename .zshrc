@@ -3,7 +3,7 @@ setopt auto_cd
 setopt auto_pushd
 setopt auto_list
 setopt auto_menu
-setopt pushd_ignore_dups 
+setopt pushd_ignore_dups
 setopt correct
 setopt list_packed
 #setopt list_types
@@ -97,15 +97,6 @@ function chpwd() {
         ls
     fi
 }
-# [コマンドラインでcdとかしたら勝手にlsするシェルスクリプト | girigiribauer.com](http://girigiribauer.com/archives/724)
-
-#function agvim ( {
-#  vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
-#})
-
-# python
-#export WORKON_HOME=~/.virtualenvs
-#. /usr/local/bin/virtualenvwrapper.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -114,3 +105,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
