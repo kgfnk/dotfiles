@@ -1,0 +1,262 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo   = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+call denite#custom#var('file_rec', 'command',
+  \ ['pt', '--follow', '--nocolor', '--nogroup',
+  \  (has('win32') ? '-g:' : '-g='), ''])
+
+call denite#custom#var('grep', 'command', ['pt'])
+call denite#custom#var('grep', 'default_opts',
+  \ ['--nogroup', '--nocolor', '--smart-case'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+nnoremap [denite] <Nop>
+"nmap <Space> [denite]
+
+"nnoremap <silent> [denite]<Space> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+"nnoremap <silent> [denite]g :<C-u>DeniteCursorWord grep:. -buffer-name=search -quit<CR>
+
+"nnoremap <silent> gr :<C-u>Denite grep:. -buffer-name=search -quit -auto-preview<CR>
+"vnoremap <silent> [denite]g :<C-u>DeniteCursorWord grep:. -buffer-name=search -quit<CR>
+
+nnoremap <silent> [denite]r :<C-u>Denite -buffer-name=search -resume -mode=normal<CR>
+
+nnoremap <silent> [denite]/ :<C-u>Denite -buffer-name=search -auto-resize line<CR>
+
+"nnoremap <silent> [denite]o :<C-u>Denite outline -no-quit -vertical -winwidth=50<CR>
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:wrap'))
+imap <S-Tab> <Plug>(fzf-complete-line)
+nnoremap <Leader><Space> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>x :Commands<CR>
+nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>gr :<C-u>Rg <C-r>=expand('<cword>')<CR><CR>
+vnoremap <Leader>gr :<C-u>Rg <C-r>=expand('<cword>')<CR><CR>
+nnoremap <Leader>k :bd<CR>
+"nnoremap <Leader>r :FZFMru<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'gregsexton/gitv'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+let g:gitgutter_highlight_lines = 1
+'''
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+hook_add = '''
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+'''
+
+[[plugins]]
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'kana/vim-textobj-line'
+
+[[plugins]]
+repo = 'kana/vim-textobj-entire'
+
+[[plugins]]  #filetypeを変更
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim', 'vim-textobj-user']
+hock_add = '''
+nmap <Leader>q <Plug>(precious-quickrun-op)
+omap ic <Plug>(textobj-precious-i)
+vmap ic <Plug>(textobj-precious-i)
+'''
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+hook_add = '''
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_enable_auto_cd = 0
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = ' '
+let g:vimfiler_readonly_file_icon = '✗'
+let g:vimfiler_marked_file_icon = '✓'
+'''
+
+[[plugins]]
+repo = 'kannokanno/previm'
+hook_add = '''
+let g:previm_open_cmd = ''
+let g:previm_enable_realtime = 1
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+let g:quickrun_config = {}
+let g:quickrun_config._ = {
+\   "split": "vertical",
+\   "runner" : "vimproc",
+\   "runner/vimproc/updatetime" : 40,
+\}
+'''
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+hook_add = '''
+let vim_markdown_preview_github=1
+'''
+
+[[plugins]]
+repo = 'vim-pandoc/vim-pandoc-after'
+hook_add = '''
+let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips", "unite.vim", "neosnippet"]
+'''
+
+[[plugins]]
+repo = 'lifepillar/vim-solarized8'
+hook_add = '''
+"set background=dark
+"au MyAutoCmd VimEnter * nested colorscheme solarized8_dark
+'''
+
+[[plugins]]
+repo = 'NLKNguyen/papercolor-theme'
+hook_add = '''
+set background=light
+au MyAutoCmd VimEnter * nested colorscheme PaperColor
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"×":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ }
+'''
+
+[[plugins]]   #日付のインクリメント
+repo = 'tpope/vim-speeddating'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+hook_add = '''
+nmap <Leader>ss ysiw
+nmap <Leader>st ysst
+nmap <Leader>sT ySSt
+'''
+
+[[plugins]]
+repo = 'neomake/neomake'
+hook_add = '''
+autocmd! BufWritePost * Neomake
+let g:neomake_open_list = 2
+'''
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'aklt/plantuml-syntax'
+
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+hook_add= '''
+let g:switch_mapping = ""
+nnoremap - :Switch<CR>
+nnoremap + :SwitchReverse<CR>
+let g:switch_custom_definitions = [
+\   ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
+\   ['-', '+', '=', '*', '/'],
+\   ['{', '}', '[', ']', '(', ')', '<', '>'],
+\   ['!', '@', '#', '$', '%', '^', '&', '|'],
+\   ['foo', 'bar', 'baz'],
+\   ['hoge', 'fuga', 'piyo'],
+\   ['yes', 'no'],
+\   ['on', 'off'],
+\   ['And', 'Or'],
+\   ['and', 'or'],
+\   ['start', 'end'],
+\   ['○', '×', '△'],
+\   ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'],
+\   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+\   ['日', '月', '火', '水', '木', '金', '土'],
+\   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+\   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+\ ]
+'''
+
+[[plugins]]
+repo = 'mattn/webapi-vim'
+
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+repo = 'kgfnk/vim-csvtrans'
