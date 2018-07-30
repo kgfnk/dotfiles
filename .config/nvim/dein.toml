@@ -260,3 +260,6 @@ nmap ga <Plug>(EasyAlign)
 
 [[plugins]]
 repo = 'kgfnk/vim-csvtrans'
+
+[[plugins]]
+repo = 'Chiel92/vim-autoformat'
