@@ -57,7 +57,11 @@ export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
 
 # docker
-export DOCKER_HOST=tcp://127.0.0.1:2375
+#export DOCKER_HOST=tcp://127.0.0.1:2375
+
+# node
+export PATH=$PATH:node_modules/.bin
+
 
 ### zsh
 
@@ -87,6 +91,7 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 ## alias
 alias ls="ls --color=auto"
 alias l="ls -lAFh"
+alias ll="ls -l"
 alias la="ls -la"
 alias alt="ls -alt"
 #delはゴミ箱へ移動
