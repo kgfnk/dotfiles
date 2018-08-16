@@ -183,11 +183,13 @@ set list
 set listchars=tab:»-,trail:_
 "set listchars=tab:>-,extends:<,trail:-,eol:<
 " 全角スペースを可視化
-augroup highlightZenkakuSpace
+augroup highlight ZenkakuSpace
   autocmd!
   autocmd VimEnter,ColorScheme * highlight ZenkakuSpace term=underline ctermbg=darkcyan guibg=#063642
   autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
 augroup END
+
+hi ZenkakuSpace term=underline ctermbg=darkcyan guibg=#063642
 
 " 長い行を折り返して表示 (nowrap:折り返さない)
 set wrap

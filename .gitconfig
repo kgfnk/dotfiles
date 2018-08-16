@@ -2,6 +2,7 @@
 	name = kgfnk
 	email = kgfnk@users.noreply.github.com
 [core]
+	whitespace = cr-at-eol
 	editor = nvim
 	precomposeunicode = true
 	excludesfile = ~/.gitignore_global
@@ -12,10 +13,10 @@
 [difftool "nvimdiff"]
     cmd = nvim -d $LOCAL $REMOTE
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [mergetool]
   prompt = false
-[mergetool "vimdiff"]
+[mergetool "nvimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"

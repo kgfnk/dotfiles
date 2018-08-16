@@ -47,21 +47,17 @@ bindkey "" history-beginning-search-forward-end
 
 # path
 export PATH=/usr/local/bin:$PATH
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library
 
-export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
 
 # docker
 #export DOCKER_HOST=tcp://127.0.0.1:2375
-
-# node
-export PATH=$PATH:node_modules/.bin
-
 
 ### zsh
 
@@ -87,6 +83,10 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+
+#node
+export PATH=$PATH:$HOME/.nodebrew/current/bin
+export PATH=$PATH:node_modules/.bin/
 
 ## alias
 alias ls="ls --color=auto"
@@ -136,7 +136,5 @@ fi
 
 zplug load
 
-autoload -U promptinit; promptinit
-prompt pure
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
