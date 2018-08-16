@@ -52,6 +52,9 @@ repo = 'gregsexton/gitv'
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
 let g:gitgutter_highlight_lines = 1
+let g:gitgutter_sign_added = '✚'
+let g:gitgutter_sign_modified = '➜'
+let g:gitgutter_sign_removed = '✘'
 '''
 [[plugins]]
 repo = 'terryma/vim-expand-region'
@@ -141,12 +144,25 @@ au MyAutoCmd VimEnter * nested colorscheme PaperColor
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+'''
 
 [[plugins]]
 repo = 'delphinus/lightline-delphinus'
-
-[[plugins]]
-repo = 'majutsushi/tagbar'
+hook_add = '''
+let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = g:ale_echo_msg_error_str
+let g:ale_sign_warning = g:ale_echo_msg_warning_str
+let g:ale_statusline_format = [
+      \ g:ale_echo_msg_error_str . ' %d',
+      \ g:ale_echo_msg_warning_str . ' %d',
+      \ nr2char(0xf4a1) . '  ']
+'''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
