@@ -4,7 +4,7 @@ setopt auto_pushd
 setopt auto_list
 setopt auto_menu
 setopt pushd_ignore_dups
-setopt correct
+#setopt correct
 setopt list_packed
 #setopt list_types
 
@@ -20,7 +20,7 @@ setopt complete_aliases
 setopt noautoremoveslash
 PROMPT="%/%% "
 PROMPT2="%_%% "
-SPROMPT="%r is correct? [n,y,a,e]: "
+#SPROMPT="%r is correct? [n,y,a,e]: "
 
 ## Command history configuration
 HISTFILE=~/.zsh_history
