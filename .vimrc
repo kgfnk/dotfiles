@@ -119,16 +119,7 @@ let g:user_emmet_settings = {
 \}
 "let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_custom.json')), "\n"))
 " }}}
-" simplenote {{{
-NeoBundle "mrtazz/simplenote.vim"
-"ID/PASSは別ファイルで定義
-"let g:SimplenoteUsername = ""
-"let g:SimplenotePassword = ""
-source ~/.simplenoterc
-let g:SimplenoteVertical=1
-let g:SimplenoteFiletype="markdown"
-let g:SimplenoteListHeight=30
-" }}}
+
 " vimproc {{{
 if !has("win32")
 NeoBundle "Shougo/vimproc", {
@@ -723,9 +714,6 @@ NeoBundleLazy "vim-scripts/TaskList.vim", {
 " キーマップ
 NeoBundle "tpope/vim-unimpaired"
 
-" CSV変換
-NeoBundle "kgfnk/vim-csvtrans"
-
 " {{{ restart.vim
 NeoBundle "tyru/restart.vim"
 let g:restart_sessionoptions
@@ -1042,11 +1030,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 " grep検索
 nnoremap <silent> gr :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit<CR><C-R><C-W><CR>
-
-"" TODOファイル
-command! Todo edit ~/Dropbox/Memo/todo.txt
-" 一時ファイル
-command! -nargs=1 -complete=filetype Tmp edit ~/Dropbox/Memo/tmp.<args>
 
 "undo履歴表示
 nmap U :<C-u>GundoToggle<CR>
