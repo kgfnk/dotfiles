@@ -36,6 +36,11 @@ setopt share_history        # share command history data
 alias vim="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
 
+export EDITOR=nvim
+export PAGER=vimpager
+export MANPAGER=vimpager
+alias less=$PAGER
+
 # key bind
 #bindkey -v
 bindkey "^R" history-incremental-search-backward

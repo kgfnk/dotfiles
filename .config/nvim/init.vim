@@ -83,16 +83,20 @@ set fileformats=unix,dos,mac
 " 基本設定{{{
 " 行番号を表示する
 set number
-"ファイル内の <Tab> が対応する空白の数
-set tabstop=4
-"シフト移動幅
-set shiftwidth=4
+" ファイル内の <Tab> が対応する空白の数
+set tabstop=2
+" シフト移動幅
+set shiftwidth=2
+" タブを半角スペースへ
+set expandtab
+" タブスペースの幅
+set softtabstop=2
 " 全角記号を正しく扱う
 set ambiwidth=double
 " Beep音を消す(ヴィジュアルベルを無効)
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
-"クリップボード共有
+" クリップボード共有
 set clipboard+=unnamedplus
 " INSERTなどモードの表示をしない
 set noshowmode
@@ -303,9 +307,7 @@ nnoremap <Leader>t :<C-u>tabnew<CR>
 nnoremap <Leader>T :<C-u>tabnew<CR>:e .<CR>
 
 " init.vimを開く
-nnoremap <Leader>. :<C-u>tabnew ~/.config/nvim/init.vim<CR>
-" dein.tomlを開く
-nnoremap <Leader>, :<C-u>tabnew ~/.config/nvim/dein.toml<CR> :<C-u>tabnew ~/.config/nvim/dein_lazy.toml<CR>gT
+nnoremap <Leader>. :<C-u>tabnew ~/.config/nvim/init.vim<CR> :<C-u>tabnew ~/.config/nvim/dein.toml<CR> :<C-u>tabnew ~/.config/nvim/dein_lazy.toml<CR> 2gT
 " init.vim再読込編集
 nnoremap <Leader>s :<C-u>source ~/.config/nvim/init.vim<CR>
 
