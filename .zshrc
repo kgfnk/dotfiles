@@ -120,7 +120,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 ### fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!node_modules"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 export ZPLUG_HOME=/usr/local/opt/zplug
@@ -130,6 +130,8 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug mafredri/zsh-async, from:github
 zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-completions"
+zplug "b4b4r07/enhancd", use:init.sh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -144,3 +146,4 @@ zplug load
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
