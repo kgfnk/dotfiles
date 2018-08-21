@@ -81,6 +81,8 @@ set fileformats=unix,dos,mac
 "}}}
 
 " 基本設定{{{
+set guifont=Cica:h16
+set printfont=Cica:h12
 " 行番号を表示する
 set number
 " ファイル内の <Tab> が対応する空白の数
@@ -318,14 +320,14 @@ nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 inoremap <C-j> <esc>
 
 " 入力補助
-inoremap `` ``<Left>
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap %% %%<Left>
+"inoremap `` ``<Left>
+"inoremap <> <><Left>
+"inoremap () ()<Left>
+"inoremap {} {}<Left>
+"inoremap [] []<Left>
+"inoremap "" ""<Left>
+"inoremap '' ''<Left>
+"inoremap %% %%<Left>
 
 " 連続インデント
 vnoremap < <gv
@@ -356,9 +358,12 @@ autocmd QuickFixCmdPost *grep* copen
 " オムニ補完 {{{
 set complete+=k
 set completeopt=menuone
-autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
+autocmd FileType *
+\   if &l:omnifunc == ''
+\ |   setlocal omnifunc=syntaxcomplete#Complete
+\ | endif
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
