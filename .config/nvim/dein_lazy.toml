@@ -49,3 +49,28 @@ on_source = ['denite.nvim']
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
 on_ft = ['qf']
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+build = 'yarn install'
+on_ft = ['typescript', 'javascript', 'css', 'json']
+on_i = 1
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+hook_add = '''
+let g:typescript_indent_disable = 1
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd FileType typescript :set makeprg=tsc
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+'''
+on_ft = ['typescript']
+
+[[plugins]]
+repo = 'jason0x43/vim-js-indent'
+hook_add = '''
+let g:js_indent_typescript = 1
+'''
+on_ft = ['javascript', 'typescript']

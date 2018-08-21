@@ -231,9 +231,6 @@ let g:switch_custom_definitions = [
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
-repo = 'mattn/sonictemplate-vim'
-
-[[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
 [[plugins]]
@@ -253,69 +250,7 @@ repo = 'kgfnk/vim-csvtrans'
 repo = 'Chiel92/vim-autoformat'
 
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
-hook_add = '''
-let g:typescript_indent_disable = 1
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-autocmd FileType typescript :set makeprg=tsc
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-'''
-
-[[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-let g:ale_completion_enabled = 0
-let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
-let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
-let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
-let g:ale_echo_msg_format = '%severity%  %linter% - %s'
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = g:ale_echo_msg_error_str
-let g:ale_sign_warning = g:ale_echo_msg_warning_str
-let g:ale_statusline_format = [
-      \ g:ale_echo_msg_error_str . ' %d',
-      \ g:ale_echo_msg_warning_str . ' %d',
-      \ nr2char(0xf4a1) . '  ']
-" 保存時に修正
-let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_use_local_config = 1
-" ファイルオープン時にチェックしない
-let g:ale_lint_on_enter = 0
-
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-let g:ale_open_list = 0
-
-" エラーと警告がなくなっても開いたままにする
-let g:ale_keep_list_window_open = 0
-
-let g:ale_linters = {
-\   'html': ['htmlhint'],
-\   'css': ['stylelint'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\}
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'html': [],
-\   'css': ['stylelint'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint']
-\}
-'''
-
-[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
-
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-hook_add = '''
-let g:typescript_indent_disable = 1
-'''
 
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
@@ -341,4 +276,48 @@ setlocal iskeyword+=-
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+let g:ale_completion_enabled = 1
+let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = g:ale_echo_msg_error_str
+let g:ale_sign_warning = g:ale_echo_msg_warning_str
+let g:ale_statusline_format = [
+      \ g:ale_echo_msg_error_str . ' %d',
+      \ g:ale_echo_msg_warning_str . ' %d',
+      \ nr2char(0xf4a1) . '  ']
+" 保存時に修正
+let g:ale_fix_on_save = 1
+" ファイルオープン時にチェックしない
+let g:ale_lint_on_enter = 0
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+let g:ale_open_list = 0
+
+" エラーと警告がなくなっても開いたままにする
+let g:ale_keep_list_window_open = 0
+
+let g:ale_linters = {
+\   'html': ['htmlhint'],
+\   'css': ['stylelint'],
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint'],
+\}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'html': [],
+\   'css': ['stylelint'],
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint']
+\}
 '''
