@@ -21,11 +21,6 @@ let g:neosnippet#expand_word_boundary = 1
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -53,6 +48,13 @@ on_ft = ['qf']
 [[plugins]]
 repo = 'prettier/vim-prettier'
 build = 'yarn install'
+hook_add = '''
+nmap <Leader>py <Plug>(PrettierAsync)
+let g:prettier#autoformat = 1
+let g:prettier#quickfix_enabled = 1
+let g:prettier#exec_cmd_async = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+'''
 on_ft = ['typescript', 'javascript', 'css', 'json']
 on_i = 1
 
@@ -70,7 +72,7 @@ on_ft = ['typescript']
 
 [[plugins]]
 repo = 'jason0x43/vim-js-indent'
-hook_add = '''
+hook_add = '''
 let g:js_indent_typescript = 1
 '''
-on_ft = ['javascript', 'typescript']
+on_ft = ['javascript', 'typescript', 'html']

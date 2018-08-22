@@ -329,6 +329,9 @@ inoremap <C-j> <esc>
 "inoremap '' ''<Left>
 "inoremap %% %%<Left>
 
+" QuickFixWindowを閉じる
+autocmd FileType qf nnoremap <buffer><silent> q :quit<cr>
+
 " 連続インデント
 vnoremap < <gv
 vnoremap > >gv

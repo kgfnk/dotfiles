@@ -256,6 +256,66 @@ repo = 'editorconfig/editorconfig-vim'
 repo = 'lambdalisue/gina.vim'
 
 [[plugins]]
+repo = 'jason0x43/vim-js-indent'
+hook_add = '''
+let g:js_indent_typescript = 1
+'''
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+#[[plugins]]
+#repo = 'Quramy/tsuquyomi'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+hook_add = '''
+let g:NERDTreeLimitedSyntax = 1
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+"vim-nerdtree-syntax-highlight
+let s:rspec_red = 'FE405F'
+let s:git_orange = 'F54D27'
+let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange " sets the color for .gitignore files
+let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
+
+" vim-devicons
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+" dir-icons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+let g:DevIconsDefaultFolderOpenSymbol = ''
+" file-icons
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
+'''
+
+[[plugins]]
+repo = 'othree/javascript-libraries-syntax.vim'
+hook_add = '''
+autocmd BufReadPre *.html let b:javascript_lib_use_angularui = 1
+'''
+
+[[plugins]]
+repo = 'curist/vim-angular-template'
+
+[[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 build = 'bash install.sh'
 branch = 'next'
@@ -263,16 +323,18 @@ hook_source = '''
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'html': ['vscode-html-languageservice'],
-    \ 'css': ['vscode-css-languageservice'],
-    \ 'typescript': ['javascript-typescript-stdio'],
-    \ 'javascript': ['javascript-typescript-stdio']
+    \ 'html': ['/usr/local/bin/html-languageserver', '--stdio'],
+    \ 'css': ['/usr/local/bin/css-languageserver', '--stdio'],
+    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio']
     \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsEnable = 0 " シンタックスチェックOFF
 " not stop completion $ & /
 setlocal iskeyword+=$
 setlocal iskeyword+=-
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
@@ -294,7 +356,8 @@ let g:ale_statusline_format = [
       \ g:ale_echo_msg_warning_str . ' %d',
       \ nr2char(0xf4a1) . '  ']
 " 保存時に修正
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_javascript_prettier_use_local_config = 1
 " ファイルオープン時にチェックしない
 let g:ale_lint_on_enter = 0
 
@@ -310,7 +373,7 @@ let g:ale_linters = {
 \   'html': ['htmlhint'],
 \   'css': ['stylelint'],
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
+\   'typescript': ['tslint -p .'],
 \}
 
 let g:ale_fixers = {
@@ -320,4 +383,5 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint']
 \}
+let g:ale_typescript_tslint_config_path = './tslint.json'
 '''

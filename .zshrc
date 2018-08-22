@@ -91,7 +91,7 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 
 #node
 export PATH=$PATH:$HOME/.nodebrew/current/bin
-export PATH=$PATH:node_modules/.bin/
+export PATH=$PATH:node_modules/.bin
 
 ## alias
 alias ls="ls --color=auto"
