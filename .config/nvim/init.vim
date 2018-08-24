@@ -83,6 +83,7 @@ set fileformats=unix,dos,mac
 " 基本設定{{{
 set guifont=Cica:h16
 set printfont=Cica:h12
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 " 行番号を表示する
 set number
 " ファイル内の <Tab> が対応する空白の数
@@ -108,11 +109,11 @@ set diffopt+=vertical
 
 "set termguicolors {{{
 set termguicolors
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+"let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-let &t_SI = "\e]50;CursorShape=1\x7"
-let &t_EI = "\e]50;CursorShape=0\x7"
+"let &t_SI = "\e]50;CursorShape=1\x7"
+"let &t_EI = "\e]50;CursorShape=0\x7"
 "}}}
 
 "日本語設定 {{{
@@ -331,6 +332,7 @@ inoremap <C-j> <esc>
 
 " QuickFixWindowを閉じる
 autocmd FileType qf nnoremap <buffer><silent> q :quit<cr>
+autocmd FileType fzf nnoremap <buffer><silent> <esc><esc> :quit<cr>
 
 " 連続インデント
 vnoremap < <gv

@@ -319,7 +319,7 @@ repo = 'curist/vim-angular-template'
 repo = 'autozimu/LanguageClient-neovim'
 build = 'bash install.sh'
 branch = 'next'
-hook_source = '''
+hook_add = '''
 set hidden
 
 let g:LanguageClient_serverCommands = {
