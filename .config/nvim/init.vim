@@ -9,6 +9,7 @@ endif
 set helplang=ja
 
 let mapleader = "\<Space>"
+let g:winresizer_start_key = "<C-Q>"
 
 " dein {{{
 augroup MyAutoCmd
@@ -403,4 +404,8 @@ tnoremap <silent> <ESC> <C-\><C-n>
 " 構文ごとに色分け表示する
 syntax enable
 " }}}
+
+let g:python_host_prog='/usr/local/bin/python2'
+let g:python3_host_prog='/usr/local/bin/python3'
+
 " vim:set ft=vim sw=2 expandtab foldmethod=marker:

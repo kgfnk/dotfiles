@@ -16,14 +16,14 @@ repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
 command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s',
+      \  'down':    '40%'})
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:wrap'))
+      \ call fzf#vim#grep(
+      \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+      \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:wrap'))
 imap <S-Tab> <Plug>(fzf-complete-line)
 nnoremap <Leader><Space> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
@@ -110,10 +110,10 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 let g:quickrun_config = {}
 let g:quickrun_config._ = {
-\   "split": "vertical",
-\   "runner" : "vimproc",
-\   "runner/vimproc/updatetime" : 40,
-\}
+      \   "split": "vertical",
+      \   "runner" : "vimproc",
+      \   "runner/vimproc/updatetime" : 40,
+      \}
 '''
 
 [[plugins]]
@@ -207,24 +207,24 @@ let g:switch_mapping = ""
 nnoremap - :Switch<CR>
 nnoremap + :SwitchReverse<CR>
 let g:switch_custom_definitions = [
-\   ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
-\   ['-', '+', '=', '*', '/'],
-\   ['{', '}', '[', ']', '(', ')', '<', '>'],
-\   ['!', '@', '#', '$', '%', '^', '&', '|'],
-\   ['foo', 'bar', 'baz'],
-\   ['hoge', 'fuga', 'piyo'],
-\   ['yes', 'no'],
-\   ['on', 'off'],
-\   ['And', 'Or'],
-\   ['and', 'or'],
-\   ['start', 'end'],
-\   ['○', '×', '△'],
-\   ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'],
-\   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
-\   ['日', '月', '火', '水', '木', '金', '土'],
-\   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
-\   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-\ ]
+      \   ['pick', 'reword', 'edit', 'squash', 'fixup', 'exec'],
+      \   ['-', '+', '=', '*', '/'],
+      \   ['{', '}', '[', ']', '(', ')', '<', '>'],
+      \   ['!', '@', '#', '$', '%', '^', '&', '|'],
+      \   ['foo', 'bar', 'baz'],
+      \   ['hoge', 'fuga', 'piyo'],
+      \   ['yes', 'no'],
+      \   ['on', 'off'],
+      \   ['And', 'Or'],
+      \   ['and', 'or'],
+      \   ['start', 'end'],
+      \   ['○', '×', '△'],
+      \   ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'],
+      \   ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+      \   ['日', '月', '火', '水', '木', '金', '土'],
+      \   ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'],
+      \   ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+      \ ]
 '''
 
 [[plugins]]
@@ -323,13 +323,13 @@ hook_add = '''
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'html': ['/usr/local/bin/html-languageserver', '--stdio'],
-    \ 'css': ['/usr/local/bin/css-languageserver', '--stdio'],
-    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio']
-    \ }
+      \ 'html': ['/usr/local/bin/html-languageserver', '--stdio'],
+      \ 'css': ['/usr/local/bin/css-languageserver', '--stdio'],
+      \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
+      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio']
+      \ }
 let g:LanguageClient_autoStart = 1
-let g:LanguageClient_diagnosticsEnable = 0 " シンタックスチェックOFF
+let g:LanguageClient_diagnosticsEnable = 1 " シンタックスチェックOFF
 " not stop completion $ & /
 setlocal iskeyword+=$
 setlocal iskeyword+=-
@@ -370,18 +370,33 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 
 let g:ale_linters = {
-\   'html': ['htmlhint'],
-\   'css': ['stylelint'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint -p .'],
-\}
+      \   'html': ['htmlhint'],
+      \   'css': ['stylelint'],
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tslint'],
+      \}
 
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'html': [],
-\   'css': ['stylelint'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint']
-\}
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'html': [],
+      \   'css': ['stylelint'],
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tslint']
+      \}
 let g:ale_typescript_tslint_config_path = './tslint.json'
+'''
+
+[[plugins]]
+repo = 'suan/vim-instant-markdown'
+
+[[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo = 'Chiel92/vim-autoformat'
+hook_add = '''
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
 '''
