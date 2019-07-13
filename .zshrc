@@ -52,13 +52,13 @@ bindkey "" history-beginning-search-forward-end
 
 # path
 export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+#export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library
 
-export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+#export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
 
 # docker
@@ -94,17 +94,19 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 export PATH=$PATH:node_modules/.bin
 
 ## alias
-alias ls="ls --color=auto"
-alias l="ls -lAFh"
-alias ll="ls -l"
-alias la="ls -la"
-alias alt="ls -alt"
+#alias ls="ls --color=auto"
+alias ls="ls -G"
+#alias l="ls -lAFh"
+#alias ll="ls -l"
+#alias la="ls -la"
+#alias alt="ls -alt"
 #delはゴミ箱へ移動
 alias del='mydel'
 function mydel() { mv $1 ~/.Trash }
 alias df='df -h'
 alias gs='git status'
 #alias find=gfind
+alias mutt="mbsync -a && neomutt && mbsync -a"
 
 # 移動したらすぐls -lah
 # ただしファイルなどが20より多かった場合はlsで簡易表示
@@ -122,6 +124,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!node_modules"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+#export FZF_LEGACY_KEYBINDINGS 0
 
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -150,3 +153,22 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export NVIM_PYTHON_LOG_FILE=/tmp/log
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
+
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+
+export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/icu4c/lib:$LDFLAGS"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include:$CPPFLAGS"
+
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="/usr/local/opt/libxslt/bin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/libxslt/lib:$LDFLAGS"
+export CPPFLAGS="-I/usr/local/opt/libxslt/include:$CPPFLAGS"
+export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="/usr/local/sbin:$PATH"

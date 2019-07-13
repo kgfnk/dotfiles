@@ -307,8 +307,6 @@ nnoremap <Leader>V :<C-u>Vexplore!<CR><CR>
 " タブ切り替え
 nnoremap <silent> <C-l> gt
 nnoremap <silent> <C-h> gT
-nnoremap <Leader>t :<C-u>tabnew<CR>
-nnoremap <Leader>T :<C-u>tabnew<CR>:e .<CR>
 
 " init.vimを開く
 nnoremap <Leader>. :<C-u>tabnew ~/.config/nvim/init.vim<CR> :<C-u>tabnew ~/.config/nvim/dein.toml<CR> :<C-u>tabnew ~/.config/nvim/dein_lazy.toml<CR> 2gT

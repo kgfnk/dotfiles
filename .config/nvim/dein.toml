@@ -7,6 +7,9 @@ repo   = 'Shougo/unite.vim'
 depends = 'neomru.vim'
 
 [[plugins]]
+repo = 'Shougo/unite-outline'
+
+[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --bin'
 merged = '0'
@@ -28,7 +31,10 @@ imap <S-Tab> <Plug>(fzf-complete-line)
 nnoremap <Leader><Space> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>x :Commands<CR>
-nnoremap <Leader>f :GFiles<CR>
+"nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>ff :<C-u>Files<CR>
+nnoremap <Leader>fg :<C-u>GFiles<CR>
+nnoremap <Leader>fG :<C-u>GFiles?<CR>
 nnoremap <Leader>gr :<C-u>Rg <C-r>=expand('<cword>')<CR><CR>
 vnoremap <Leader>gr :<C-u>Rg <C-r>=expand('<cword>')<CR><CR>
 nnoremap <Leader>k :bd<CR>
@@ -125,7 +131,7 @@ let vim_markdown_preview_github=1
 [[plugins]]
 repo = 'vim-pandoc/vim-pandoc-after'
 hook_add = '''
-let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips", "unite.vim", "neosnippet"]
+let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips", "unite.vim"]
 '''
 
 [[plugins]]
@@ -268,6 +274,18 @@ repo = 'editorconfig/editorconfig-vim'
 #repo = 'Quramy/tsuquyomi'
 
 [[plugins]]
+repo = 'leafgarland/typescript-vim'
+hook_add = '''
+autocmd FileType typescript :set makeprg=tsc
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+let g:typescript_indent_disable = 1
+let g:typescript_opfirst='\%([<>=,?^%|*/&]\|\([-:+]\)\1\@!\|!=\|in\%(stanceof\)\=\>\)'
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+'''
+
+[[plugins]]
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
@@ -343,7 +361,7 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
 let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
 let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
@@ -373,7 +391,7 @@ let g:ale_linters = {
       \   'html': ['htmlhint'],
       \   'css': ['stylelint'],
       \   'javascript': ['eslint'],
-      \   'typescript': ['tslint'],
+      \   'typescript': ['tsserver'],
       \}
 
 let g:ale_fixers = {
@@ -400,3 +418,6 @@ let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
 '''
+
+[[plugins]]
+repo='neomutt/neomutt.vim'
