@@ -124,7 +124,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!node_modules"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-#export FZF_LEGACY_KEYBINDINGS 0
 
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
