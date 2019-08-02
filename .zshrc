@@ -42,13 +42,14 @@ export MANPAGER=vimpager
 alias less=$PAGER
 
 # key bind
-#bindkey -v
+bindkey -v
 bindkey "^R" history-incremental-search-backward
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "" history-beginning-search-backward-end
 bindkey "" history-beginning-search-forward-end
+bindkey "jj" vi-cmd-mode
 
 # path
 export PATH=/usr/local/bin:$PATH
@@ -171,3 +172,5 @@ export LDFLAGS="-L/usr/local/opt/libxslt/lib:$LDFLAGS"
 export CPPFLAGS="-I/usr/local/opt/libxslt/include:$CPPFLAGS"
 export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="/usr/local/sbin:$PATH"
+
+eval "$(fasd --init auto)"

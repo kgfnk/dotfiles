@@ -318,16 +318,7 @@ nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 
 " insertモードを抜ける
 inoremap <C-j> <esc>
-
-" 入力補助
-"inoremap `` ``<Left>
-"inoremap <> <><Left>
-"inoremap () ()<Left>
-"inoremap {} {}<Left>
-"inoremap [] []<Left>
-"inoremap "" ""<Left>
-"inoremap '' ''<Left>
-"inoremap %% %%<Left>
+inoremap <silent> jj <esc>
 
 " QuickFixWindowを閉じる
 autocmd FileType qf nnoremap <buffer><silent> q :quit<cr>
@@ -394,6 +385,7 @@ endfunction
 
 " ターミナル{{{
 tnoremap <silent> <ESC> <C-\><C-n>
+tnoremap <silent> <c-j> <C-\><C-n>
 "}}}
 
 " カラースキーム{{{

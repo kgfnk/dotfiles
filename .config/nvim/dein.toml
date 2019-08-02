@@ -188,9 +188,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 [[plugins]]
 repo = 'tpope/vim-surround'
 hook_add = '''
-nmap <Leader>ss ysiw
-nmap <Leader>st ysst
-nmap <Leader>sT ySSt
+nmap <Leader>S ysiw
+nmap <Leader>St ysst
+nmap <Leader>ST ySSt
 '''
 
 #[[plugins]]
@@ -421,3 +421,6 @@ au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
 
 [[plugins]]
 repo='neomutt/neomutt.vim'
+
+[[plugins]]
+repo='cohama/lexima.vim'
