@@ -107,6 +107,7 @@ set noshowmode
 set inccommand=split
 " diff
 set diffopt+=vertical
+set autowrite
 
 "set termguicolors {{{
 set termguicolors
@@ -320,6 +321,10 @@ nnoremap <ESC><ESC> :<C-u>nohlsearch<CR>
 inoremap <C-j> <esc>
 inoremap <silent> jj <esc>
 
+" quickfix
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 " QuickFixWindowを閉じる
 autocmd FileType qf nnoremap <buffer><silent> q :quit<cr>
 autocmd FileType fzf nnoremap <buffer><silent> <esc><esc> :quit<cr>

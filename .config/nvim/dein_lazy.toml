@@ -44,3 +44,11 @@ hook_add = '''
 let g:js_indent_typescript = 1
 '''
 on_ft = ['javascript', 'typescript', 'html']
+
+[[plugins]]
+repo = 'fatih/vim-go'
+hook_add = '''
+let g:go_version_warning = 0
+let g:go_list_type = "quickfix"
+'''
+on_ft = ['go']

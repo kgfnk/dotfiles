@@ -344,7 +344,8 @@ let g:LanguageClient_serverCommands = {
       \ 'html': ['/usr/local/bin/html-languageserver', '--stdio'],
       \ 'css': ['/usr/local/bin/css-languageserver', '--stdio'],
       \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio']
+      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+      \ 'go': ['gopls']
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsEnable = 1 " シンタックスチェックOFF

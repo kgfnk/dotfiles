@@ -21,7 +21,6 @@ setopt noautoremoveslash
 PROMPT="%/%% "
 PROMPT2="%_%% "
 #SPROMPT="%r is correct? [n,y,a,e]: "
-
 ## Command history configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
