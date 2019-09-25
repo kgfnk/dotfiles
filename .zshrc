@@ -1,3 +1,5 @@
+export PYTHONIOENCODING=utf-8
+
 export LANG=ja_JP.UTF-8
 setopt auto_cd
 setopt auto_pushd
@@ -150,8 +152,8 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-export NVIM_PYTHON_LOG_FILE=/tmp/log
-export NVIM_PYTHON_LOG_LEVEL=DEBUG
+#export NVIM_PYTHON_LOG_FILE=/tmp/log
+#export NVIM_PYTHON_LOG_LEVEL=DEBUG
 
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/libxml2/lib"
