@@ -174,4 +174,7 @@ export CPPFLAGS="-I/usr/local/opt/libxslt/include:$CPPFLAGS"
 export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+export GOPATH=$HOME/go
+export PATH=$HOME/go/bin:$PATH
+
 eval "$(fasd --init auto)"

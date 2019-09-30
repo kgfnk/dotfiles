@@ -110,9 +110,9 @@ set diffopt+=vertical
 set autowrite
 
 "set termguicolors {{{
-set termguicolors
+"set termguicolors
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "let &t_SI = "\e]50;CursorShape=1\x7"
 "let &t_EI = "\e]50;CursorShape=0\x7"
