@@ -42,6 +42,8 @@ export PAGER=vimpager
 export MANPAGER=vimpager
 alias less=$PAGER
 
+alias v="f -e nvim"
+
 # key bind
 bindkey -v
 bindkey "^R" history-incremental-search-backward
