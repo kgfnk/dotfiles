@@ -473,10 +473,10 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 inoremap  <silent> <expr>  <cr>  pumvisible（）？coc＃_select_confirm（）： 
                                             \ "\ < C - g > u \ < CR> \ < c - r > = c<Paste>
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+"imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+"vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -514,3 +514,6 @@ repo = 'zxqfl/tabnine-vim'
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
+
+[[plugins]]
+repo = 'posva/vim-vue'

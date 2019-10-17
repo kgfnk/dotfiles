@@ -283,6 +283,9 @@ vnoremap <C-p> I<C-r>"<ESC><ESC>
 " カーソルが中央になるようにスクロール
 "inoremap <C-l> <ESC>zzi
 
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
 " 移動
 " カーソルを行頭へ
 "inoremap <C-a> <ESC>0i
