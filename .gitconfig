@@ -6,6 +6,7 @@
 	editor = nvim
 	precomposeunicode = true
 	excludesfile = ~/.gitignore_global
+	commentchar = auto
 [diff]
 	tool = nvimdiff
 [difftool]
@@ -41,3 +42,4 @@
 	unstage = reset -q HEAD --
 	amend = commit --amend
 	graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	pr = pull-request

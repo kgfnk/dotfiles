@@ -103,9 +103,9 @@ export PATH=$PATH:node_modules/.bin
 ## alias
 #alias ls="ls --color=auto"
 alias ls="ls -G"
-#alias l="ls -lAFh"
-#alias ll="ls -l"
-#alias la="ls -la"
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -la"
 #alias alt="ls -alt"
 #delはゴミ箱へ移動
 alias del='mydel'
@@ -141,6 +141,7 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "b4b4r07/enhancd", use:init.sh
+zplug "supercrabtree/k"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -179,7 +180,19 @@ export CPPFLAGS="-I/usr/local/opt/libxslt/include:$CPPFLAGS"
 export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="/usr/local/sbin:$PATH"
 
-# golang
+### rbenv
+[[ -d ~/.rbenv  ]] && \
+export PATH=${HOME}/.rbenv/bin:${PATH} && \
+eval "$(rbenv init -)"
+
+# jenv
+export JENV_ROOT="$HOME/.jenv"
+if [ -d "${JENV_ROOT}" ]; then
+  export PATH="$JENV_ROOT/bin:$PATH"
+  eval "$(jenv init -)"
+fi
+
+### golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
