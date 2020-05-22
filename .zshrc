@@ -44,6 +44,8 @@ alias less=$PAGER
 
 alias v="f -e nvim"
 
+alias g="frepo"
+
 # key bind
 bindkey -v
 bindkey "^R" history-incremental-search-backward
@@ -61,6 +63,7 @@ export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library
+#export PATH=$PATH:~/Library/Python/2.7/bin
 
 #export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export MANPATH=/opt/local/share/man:/opt/local/man:$MANPATH
@@ -188,3 +191,23 @@ eval "$(goenv init -)"
 eval "$(fasd --init auto)"
 
 export CLOUDSDK_PYTHON=/usr/local/bin/python
+
+frepo() {
+  local dir
+  dir=$(ghq list > /dev/null | fzf-tmux --reverse +m) &&
+    cd $(ghq root)/$dir
+}
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+source <(kubectl completion zsh)

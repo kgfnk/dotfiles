@@ -43,6 +43,10 @@ nnoremap <Leader>k :bd<CR>
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+depends = ['tpope/vim-rhubarb']
+
+[[plugins]]
+repo = 'tpope/vim-rhubarb'
 
 [[plugins]]
 repo = 'shumphrey/fugitive-gitlab.vim'
@@ -123,12 +127,6 @@ let g:quickrun_config._ = {
 let g:quickrun_config.go= {
   \   'command': 'go run',
   \ }
-'''
-
-[[plugins]]
-repo = 'rcmdnk/vim-markdown'
-hook_add = '''
-let vim_markdown_preview_github=1
 '''
 
 [[plugins]]
@@ -255,8 +253,6 @@ nmap ga <Plug>(EasyAlign)
 [[plugins]]
 repo = 'kgfnk/vim-csvtrans'
 
-[[plugins]]
-repo = 'Chiel92/vim-autoformat'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
@@ -487,9 +483,6 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 '''
-
-[[plugins]]
-repo = 'suan/vim-instant-markdown'
 
 [[plugins]]
 repo = 'simeji/winresizer'

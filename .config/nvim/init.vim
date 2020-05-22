@@ -403,7 +403,7 @@ tnoremap <silent> <c-j> <C-\><C-n>
 syntax enable
 " }}}
 
-let g:python_host_prog='/usr/local/bin/python2'
+let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
 
 " vim:set ft=vim sw=2 expandtab foldmethod=marker:
