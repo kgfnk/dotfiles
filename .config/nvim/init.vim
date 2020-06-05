@@ -110,7 +110,7 @@ set diffopt+=vertical
 set autowrite
 
 "set termguicolors {{{
-"set termguicolors
+set termguicolors
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -178,6 +178,10 @@ set nocursorcolumn
 autocmd VimEnter,ColorScheme * highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 autocmd VimEnter,ColorScheme * highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+" 透明化
+set pumblend=15
+set winblend=15
 
 autocmd InsertEnter * highlight CursorLine cterm=bold
 autocmd InsertEnter * highlight CursorLine gui=bold
@@ -403,7 +407,7 @@ tnoremap <silent> <c-j> <C-\><C-n>
 syntax enable
 " }}}
 
-let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+"let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
+"let g:python3_host_prog='/usr/bin/python3'
 
 " vim:set ft=vim sw=2 expandtab foldmethod=marker:

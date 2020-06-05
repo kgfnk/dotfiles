@@ -12,5 +12,6 @@
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
     }
-  }
+  },
+  "git.enableGutters": true
 }

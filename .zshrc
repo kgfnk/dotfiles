@@ -58,6 +58,7 @@ bindkey "jj" vi-cmd-mode
 
 # path
 export PATH=/usr/local/bin:$PATH
+export PATH=~/.local/bin:$PATH
 #export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:${HOME}/.cabal/bin:$PATH
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
@@ -130,7 +131,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 ### fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!node_modules"'
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+#export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -142,6 +144,9 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
+zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
+zplug "wookayin/fzf-fasd"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -224,3 +229,4 @@ eval "$(jenv init -)"
 
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 source <(kubectl completion zsh)
+export PATH="/usr/local/opt/libpq/bin:$PATH"
