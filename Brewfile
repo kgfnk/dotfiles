@@ -1,82 +1,84 @@
-#---
-#事前準備
-#---
-#Homebrewを最新版へアップデート
-update
-#Formulaを更新
-upgrade
-#---
-#リポジトリ追加
-#---
-#公式以外のバージョン
-tap homebrew/dupes
-#最新バージョンのFormula
-tap homebrew/versions
-#バイナリ配布用
-tap homebrew/binary
-# cask
-tap phinze/homebrew-cask
-tap caskroom/cask
-tap peco/peco
-#---
-# パッケージのインストール
-#---
-# コマンド群
-install coreutils
-install diffutils
-# コマンド
-install curl
-install wget
-install zsh
-install git
-install openssl
-install readline
-install zsh-completions
-#install brew-cask
-install caskroom/cask/brew-cask
-install markdown
-install ag
-install ctags
-install w3m
-install tree
-install sl
-install vim --with-lua --override-system-vi
-#install macvim
-install ricty
-install peco
-# プログラム言語
-install rbenv
-install ruby-build
-install lua
-install python
-#フォント
-install fontforge
-install fontconfig
-install freetype
-#---
-#アプリのインストール
-#---
-cask install adobe-reader --force
-cask install google-chrome --force
-cask install google-japanese-ime --force
-cask install dropbox --force
-cask install github --force
-cask install skitch --force
-cask install iterm2 --force
-cask install sublime-text --force
-cask install bettertouchtool --force
-cask install karabiner --force
-cask install cheatsheet --force
-cask install kobito --force
-cask install alfred --force
-# alfredから検索可能にする
-cask alfred link --force
-cask install xtrafinder --force
-cask install xquartz --force
-cask install yorufukurou --force
-cask install virtualbox --force
-cask install vagrant --force
-cask install dash --force
-cask install atom
-#古いバージョンを削除
-cleanup
+tap "tkengo/highway"
+tap "splhack/splhack"
+tap "homebrew/dupes"
+tap "homebrew/core"
+tap "homebrew/versions"
+tap "homebrew/binary"
+tap "homebrew/bundle"
+tap "sanemat/font"
+tap "caskroom/cask"
+tap "knqyf263/pet"
+tap "rcmdnk/file"
+tap "brona/iproute2mac"
+tap "neovim/neovim"
+tap "peco/peco"
+brew "apple-gcc42"
+brew "autoconf"
+brew "automake"
+brew "binutils"
+brew "boost"
+brew "gettext"
+brew "libffi"
+brew "pixman"
+brew "cloog"
+brew "cmake"
+brew "coreutils"
+brew "cscope"
+brew "curl"
+brew "czmq"
+brew "diffutils"
+brew "fish"
+brew "icu4c"
+brew "libtool"
+brew "gcc"
+brew "gd"
+brew "ghc"
+brew "git"
+brew "git-flow"
+brew "gmp@4"
+brew "go"
+brew "hub"
+brew "iproute2mac"
+brew "isl@0.12"
+brew "jemalloc"
+brew "openssl"
+brew "libevent"
+brew "libgpg-error"
+brew "libksba"
+brew "libsodium"
+brew "libtermkey"
+brew "libusb"
+brew "libvterm"
+brew "libxslt"
+brew "libyaml"
+brew "mercurial"
+brew "msgpack"
+brew "unibilium"
+brew "neovim"
+brew "nkf"
+brew "node"
+brew "openssl@1.1"
+brew "ossp-uuid"
+brew "packer"
+brew "pandoc"
+brew "peco"
+brew "plantuml"
+brew "python3"
+brew "rbenv"
+brew "reattach-to-user-namespace"
+brew "ripgrep"
+brew "sl"
+brew "tag"
+brew "the_platinum_searcher"
+brew "the_silver_searcher"
+brew "tig"
+brew "tmux"
+brew "tree"
+brew "w3m"
+brew "wget"
+brew "zsh"
+brew "zsh-completions"
+brew "knqyf263/pet/pet"
+brew "sanemat/font/ricty", args: ["with-powerline"]
+brew "splhack/splhack/cmigemo-mk", args: ["HEAD"]
+brew "tkengo/highway/highway"
